@@ -134,10 +134,15 @@
             cursor: not-allowed;
         }
 
-        a.reference {
-            color: #1769aa;
-            overflow-wrap: anywhere;
-        }
+        .reference {
+    color: #1769aa;
+    text-decoration: none;
+}
+
+.reference:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
 
         @keyframes appear {
             from {
@@ -199,52 +204,68 @@
         <div class="progress" id="progress"></div>
     </div>
 
-    <!-- SLIDE 1 -->
-    <section class="slide active">
-        <h1>Fibre-Reinforced Concrete</h1>
+    
+<!-- SLIDE 1 -->
+<section class="slide active">
+    <h1>Fibre-Reinforced Concrete</h1>
 
-        <p>
-            To bridge the gap between microscopic crack initiation and macro-scale structural load capacity, discrete, discontinuous fibers are randomly dispersed throughout the concrete matrix to produce Fibre-Reinforced Concrete (FRC). Rather than replacing conventional continuous reinforcement bars, fibers act as three-dimensional micro-reinforcement distributed across the entire volume of the element, intercepting micro-cracks before they coalesce into catastrophic failure planes (ACI 544.1R-96).
-        </p>
-    </section>
+    
+<p>
+    To bridge the gap between microscopic crack initiation and macro-scale structural load capacity, discrete, discontinuous fibers are randomly dispersed throughout the concrete matrix to produce Fibre-Reinforced Concrete (FRC). Rather than replacing conventional continuous reinforcement bars, fibers act as three-dimensional micro-reinforcement distributed across the entire volume of the element, intercepting micro-cracks before they coalesce into catastrophic failure planes
+     (<a class="reference"
+    href="https://www.concrete.org/store/productdetail.aspx?ItemID=544196"
+    target="_blank"
+    rel="noopener noreferrer">ACI 544.1R-96</a>).
+</p>
 
-    <!-- SLIDE 2 -->
-    <section class="slide">
-        <h1>Working Principle: Multi-Stage Crack Control</h1>
+</section>
 
-        <h2>Micro-Crack Bridging Action</h2>
 
-        <p>
-            As tensile strain localizes in the cement paste, dispersed fibers immediately intersect the nascent crack plane. The fibers bear tensile stresses that the fractured matrix can no longer support, arresting early crack opening, altering the fracture path, and significantly delaying crack coalescence (Balaguru & Shah, 1992).
-        </p>
+<!-- SLIDE 2 -->
+<section class="slide">
+    <h1>Working Principle: Multi-Stage Crack Control</h1>
 
-        <h2>Post-Peak Toughness &amp; Energy Dissipation</h2>
+    <h2>Micro-Crack Bridging Action</h2>
 
-        <p>
-            When macro-cracks eventually develop, the failure mode shifts from brittle matrix cleavage to controlled fiber debonding, friction, and progressive pull-out. This fundamental shift imparts substantial post-cracking toughness and pseudo-ductile load deformation to the composite (ASTM C1609 (<a class="reference" href="https://www.astm.org/c1609_c1609m-19a.html" target="_blank" rel="noopener noreferrer">https://www.astm.org/c1609_c1609m-19a.html</a>))
-        </p>
-    </section>
+    <p>
+        As tensile strain localizes in the cement paste, dispersed fibers immediately intersect the nascent crack plane. The fibers bear tensile stresses that the fractured matrix can no longer support, arresting early crack opening, altering the fracture path, and significantly delaying crack coalescence
+        (Balaguru &amp; Shah, 1992
+        (<a class="reference" href="https://www.accessengineeringlibrary.com/" target="_blank" rel="noopener noreferrer">Balaguru &amp; Shah, 1992</a>)).
+    </p>
 
-    <!-- SLIDE 3 -->
-    <section class="slide">
-        <!-- <h1>Factors Affecting Mechanical Performance</h1> -->
+    <h2>Post-Peak Toughness &amp; Energy Dissipation</h2>
+    
+<p>
+    When macro-cracks eventually develop, the failure mode shifts from brittle matrix cleavage to controlled fiber debonding, friction, and progressive pull-out. This fundamental shift imparts substantial post-cracking toughness and pseudo-ductile load deformation to the composite
+    (<a class="reference" href="https://www.astm.org/c1609_c1609m-19a.html" target="_blank" rel="noopener noreferrer">ASTM C1609</a>).
+</p>
 
-        <p>
-            The mechanical efficacy of FRC depends on the composite interaction between the fiber geometry, volume dosage, and the host cement matrix (Johnston, 2001).
-        </p>
+   re
+</section>
 
-        <h2>- Matrix Densification &amp; Interfacial Bond</h2>
 
-        <p>
-            The load-transfer efficiency across crack planes is governed by the Interfacial Transition Zone (ITZ) surrounding individual fibers. Higher matrix grades provide a denser microstructure and greater frictional grip against fiber pull-out, optimizing tensile stress transfer across cracks.
-        </p>
+<!-- SLIDE 3 -->
+<section class="slide">
 
-        <h2>- Fiber Volume Fraction</h2>
+    <p>
+        The mechanical efficacy of FRC depends on the composite interaction between the fiber geometry, volume dosage, and the host cement matrix
+        (Johnston, 2001).
+    </p>
 
-        <p>
-            The quantity of fibers directly determines crack-arrest density. Systematic variation in fiber volume fraction dictates the transition from single-crack brittle failure to multi-cracking pseudo-ductility under bending and axial tension.
-        </p>
-    </section>
+    <h2>- Matrix Densification &amp; Interfacial Bond</h2>
+
+    <p>
+        The load-transfer efficiency across crack planes is governed by the Interfacial Transition Zone (ITZ) surrounding individual fibers. Higher matrix grades provide a denser microstructure and greater frictional grip against fiber pull-out, optimizing tensile stress transfer across cracks.
+    </p>
+
+    <h2>- Fiber Volume Fraction</h2>
+
+    <p>
+        The quantity of fibers directly determines crack-arrest density. Systematic variation in fiber volume fraction dictates the transition from single-crack brittle failure to multi-cracking pseudo-ductility under bending and axial tension.
+    </p>
+
+</section>
+
 
     <div class="bottom-bar">
         <span class="slide-count" id="slideCount">Slide 1 of 3</span>
