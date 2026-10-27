@@ -478,26 +478,43 @@ function showSlide(index) {
         `Slide ${currentSlide + 1} of ${slides.length}`;
 
     prevBtn.disabled = currentSlide === 0;
-    nextBtn.disabled = currentSlide === slides.length - 1;
+    // nextBtn.disabled = currentSlide === slides.length - 1;
+    nextBtn.disabled = false;
+
+    // nextBtn.textContent =
+        // currentSlide === slides.length - 1 ? "Last slide" : "Next →";
 
     nextBtn.textContent =
-        currentSlide === slides.length - 1 ? "Last slide" : "Next →";
+        currentSlide === slides.length - 1 ? "Next Topic →" : "Next →";
 
     progressFill.style.width =
         `${((currentSlide + 1) / slides.length) * 100}%`;
+} 
+
+function changeSlide(direction) {
+        if (currentSlide === slides.length - 1 && direction === 1) {
+            window.location.href = "flexural.html";
+            return;
+        }
+
+        const nextIndex = currentSlide + direction;
+
+        if (nextIndex >= 0 && nextIndex < slides.length) {
+            showSlide(nextIndex);
+        }
 }
 
 prevBtn.addEventListener("click", () => {
-    showSlide(currentSlide - 1);
+    changeSlide( - 1);
 });
 
 nextBtn.addEventListener("click", () => {
-    showSlide(currentSlide + 1);
+    changeSlide(1);
 });
 
 document.addEventListener("keydown", (event) => {
     if (event.key === "ArrowRight") {
-        showSlide(currentSlide + 1);
+        changeSlide(1);;
     }
 
     if (event.key === "ArrowLeft") {
