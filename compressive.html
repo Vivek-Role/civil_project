@@ -1,0 +1,512 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Compressive Strength Test</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #111;
+    background: #fff;
+}
+
+/* Top navigation - same style as Overview */
+.top-nav {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    border-bottom: 1px solid #ddd;
+    border-top: 12px solid #383838;
+    background: #fff;
+}
+
+.top-nav a {
+    color: #1769aa;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.top-nav span {
+    font-size: 16px;
+}
+
+/* Progress bar */
+.progress-track {
+    height: 4px;
+    background: #eee;
+    width: 100%;
+}
+
+.progress-fill {
+    height: 100%;
+    width: 20%;
+    background: #1769aa;
+    transition: width 0.25s ease;
+}
+
+/* Main white content area */
+.content {
+    max-width: 1050px;
+    width: calc(100% - 40px);
+    margin: 55px auto 100px;
+}
+
+.slide {
+    display: none;
+    min-height: 490px;
+}
+
+.slide.active {
+    display: block;
+}
+
+.slide h1 {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0 0 38px;
+    line-height: 1.25;
+}
+
+.slide p {
+    font-size: 20px;
+    line-height: 1.8;
+    text-align: justify;
+    margin: 0 0 20px;
+}
+
+/* Tables */
+.table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    margin-top: 12px;
+}
+
+th, td {
+    border: 1px solid #d5dce3;
+    padding: 11px 10px;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    background: #202b40;
+    color: #fff;
+    font-weight: 600;
+}
+
+tbody tr:nth-child(even) {
+    background: #f3f5f7;
+}
+
+/* Bottom navigation - same style as Overview */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-height: 82px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 6%;
+    z-index: 10;
+}
+
+.slide-count {
+    color: #555;
+    font-size: 14px;
+}
+
+.nav-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-buttons button {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 6px;
+    border: 1px solid #1769aa;
+    background: #1769aa;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-buttons button:disabled {
+    background: white;
+    color: #a8c6df;
+    border-color: #b8d0e6;
+    cursor: default;
+}
+
+/* Responsive layout */
+@media (max-width: 700px) {
+    .top-nav {
+        padding: 0 20px;
+    }
+
+    .content {
+        width: calc(100% - 32px);
+        margin-top: 32px;
+        margin-bottom: 110px;
+    }
+
+    .slide {
+        min-height: 0;
+    }
+
+    .slide h1 {
+        font-size: 28px;
+        margin-bottom: 25px;
+    }
+
+    .slide p {
+        font-size: 17px;
+        line-height: 1.7;
+    }
+
+    table {
+        min-width: 750px;
+    }
+
+    .bottom-nav {
+        padding: 12px 16px;
+    }
+
+    .nav-buttons button {
+        padding: 10px 12px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Top navigation -->
+<div class="top-nav">
+    <a href="index.html">← Home</a>
+    <span>Compressive Strength Test</span>
+</div>
+
+<!-- Progress bar -->
+<div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- Main content -->
+<main class="content">
+
+    <!-- SLIDE 1: AIM -->
+    <section class="slide active">
+        <h1>1. Aim</h1>
+
+        <p>
+            To determine the compressive strength of fiber-reinforced M50
+            grade concrete across varying fiber volume fractions (Vf) at
+            7 days (early strength development) and 28 days (design
+            acceptance) per IS 516 (Part 1 / Section 1), evaluating
+            load-bearing capacity and cracking mechanics.
+        </p>
+    </section>
+
+    <!-- SLIDE 2: THEORY -->
+    <section class="slide">
+        <h1>2. Theory &amp; Governing Equations</h1>
+
+        <p>
+            Uniaxial compressive loading induces lateral tensile strain via
+            Poisson's effect. In plain concrete, this causes sudden splitting
+            or explosive conical shear failure. Discontinuous fibers provide
+            three-dimensional lateral confinement, bridging opening micro-cracks
+            and converting brittle failure into pseudo-ductile crushing with
+            sustained residual load capacity.
+        </p>
+
+        <p>
+            Compressive strength: f<sub>c</sub> = P / A
+        </p>
+
+        <p>
+            f<sub>c</sub> = Compressive strength (MPa or N/mm²)<br>
+            P = Maximum failure load (N)<br>
+            A = Loaded cross-sectional area (mm²)
+        </p>
+    </section>
+
+    <!-- SLIDE 3: MATERIALS -->
+    <section class="slide">
+        <h1>3. Materials Required</h1>
+
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Material Component</th>
+                    <th>Specification / Classification</th>
+                    <th>0.0% (Control)</th>
+                    <th>0.5% Fibre (Vf)</th>
+                    <th>0.75% Fibre (Vf)</th>
+                    <th>1.0% Fibre (Vf)</th>
+                    <th>1.25% Fibre (Vf)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>Cement</td>
+                    <td>OPC 53 Grade (IS 269)</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Fly Ash</td>
+                    <td>Class F Pozzolan (IS 3812)</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Silica Fume</td>
+                    <td>Micro-silica Powder (IS 15388)</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Water</td>
+                    <td>Clean Potable Water (IS 456)</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Sand (Fine Aggregate)</td>
+                    <td>Clean Graded / Zone II (IS 383)</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Coarse Aggregate (&lt; 10 mm)</td>
+                    <td>10 mm down crushed stone</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Coarse Aggregate (&gt; 10 mm)</td>
+                    <td>20 mm down crushed stone</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Fibre</td>
+                    <td>Discrete Reinforcing Fibre</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+                <tr>
+                    <td>Admixture</td>
+                    <td>PCE Superplasticizer (IS 9103)</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- SLIDE 4: APPARATUS -->
+    <section class="slide">
+        <h1>4. Apparatus Required</h1>
+
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>S. No.</th>
+                    <th>Apparatus</th>
+                    <th>Specification / Standards</th>
+                    <th>Purpose / Operational Details</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Compression Testing Machine (CTM)</td>
+                    <td>Calibrated, conforming to IS 516</td>
+                    <td>Uniaxial compressive load application at a uniform rate.</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Cube Moulds</td>
+                    <td>Machined cast iron/steel (IS 10086)</td>
+                    <td>Casting specimens with rigid base plates and orthogonal interior faces.</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Tamping Rod</td>
+                    <td>Diameter, length, bullet/rounded ends</td>
+                    <td>Manual compaction of concrete in layers (35 uniform strokes per layer).</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Vibrating Table</td>
+                    <td>Conforming to IS 2505 / laboratory standard</td>
+                    <td>External mechanical vibration to compact concrete cubes and eliminate entrapped air voids.</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Needle Vibrator (Internal Compactor)</td>
+                    <td>Needle diameter, high-frequency vibrator</td>
+                    <td>Internal consolidation to ensure thorough compaction around fibers and prevent fiber clustering.</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>Weighing Balance</td>
+                    <td>Digital laboratory balance (precision)</td>
+                    <td>Accurate batching of binder, aggregates, fibers, water, and admixtures.</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Curing Tank</td>
+                    <td>Thermostatically controlled water bath</td>
+                    <td>Continuous moist submerged curing for 7-day and 28-day hydration.</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+    <!-- SLIDE 5: OBSERVATION -->
+    <section class="slide">
+        <h1>5. Observation &amp; Experimental Data Sheet (7 &amp; 28 Days)</h1>
+
+        <p>
+            <strong>Specimen Dimensions:</strong> As specified in the experiment.
+        </p>
+
+        <p>
+            <strong>Sampling:</strong> 3 cubes per test age per batch
+            (Total = 6 cubes per mix, 30 cubes total).
+        </p>
+
+        <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Mix Designation</th>
+                    <th>Fibre Dosage (Vf)</th>
+                    <th>7-Day Mean Load P (kN)</th>
+                    <th>7-Day Strength fc,7</th>
+                    <th>28-Day Mean Load P (kN)</th>
+                    <th>28-Day Strength fc,28</th>
+                    <th>Observed Failure Mode</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <td>M50-0.0 (Control)</td>
+                    <td>0.00%</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>Brittle conical shear; complete spalling</td>
+                </tr>
+                <tr>
+                    <td>M50-0.5</td>
+                    <td>0.50%</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>Minor spalling; core intact</td>
+                </tr>
+                <tr>
+                    <td>M50-0.75</td>
+                    <td>0.75%</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>Lateral confinement; ductile bulging</td>
+                </tr>
+                <tr>
+                    <td>M50-1.0</td>
+                    <td>1.00%</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>Micro-crack retention; intact geometry</td>
+                </tr>
+                <tr>
+                    <td>M50-1.25</td>
+                    <td>1.25%</td>
+                    <td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>High energy absorption; check dispersion</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+    </section>
+
+</main>
+
+<!-- Bottom navigation -->
+<div class="bottom-nav">
+    <span class="slide-count" id="slideCount">Slide 1 of 5</span>
+
+    <div class="nav-buttons">
+        <button id="prevBtn" disabled>← Previous</button>
+        <button id="nextBtn">Next →</button>
+    </div>
+</div>
+
+<script>
+const slides = document.querySelectorAll(".slide");
+let currentSlide = 0;
+
+const slideCount = document.getElementById("slideCount");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const progressFill = document.getElementById("progressFill");
+
+function showSlide(index) {
+    currentSlide = Math.max(0, Math.min(index, slides.length - 1));
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === currentSlide);
+    });
+
+    slideCount.textContent =
+        `Slide ${currentSlide + 1} of ${slides.length}`;
+
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slides.length - 1;
+
+    nextBtn.textContent =
+        currentSlide === slides.length - 1 ? "Last slide" : "Next →";
+
+    progressFill.style.width =
+        `${((currentSlide + 1) / slides.length) * 100}%`;
+}
+
+prevBtn.addEventListener("click", () => {
+    showSlide(currentSlide - 1);
+});
+
+nextBtn.addEventListener("click", () => {
+    showSlide(currentSlide + 1);
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "ArrowRight") {
+        showSlide(currentSlide + 1);
+    }
+
+    if (event.key === "ArrowLeft") {
+        showSlide(currentSlide - 1);
+    }
+});
+
+showSlide(0);
+</script>
+
+</body>
+</html>

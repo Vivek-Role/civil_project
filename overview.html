@@ -1,0 +1,318 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Overview</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: #222;
+        }
+
+        .presentation {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 6%;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .top-bar a {
+            color: #1769aa;
+            text-decoration: none;
+        }
+
+        .progress-track {
+            height: 4px;
+            background: #eee;
+        }
+
+        .progress {
+            height: 100%;
+            width: 33.333%;
+            background: #1769aa;
+            transition: width 0.25s ease;
+        }
+
+        .slide {
+            display: none;
+            flex: 1;
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 55px 35px;
+            animation: appear 0.3s ease;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin: 0 0 35px;
+        }
+
+        h2 {
+            font-size: 25px;
+            margin: 35px 0 18px;
+        }
+
+        p, li {
+            font-size: 18px;
+            line-height: 1.9;
+        }
+
+        p {
+            text-align: justify;
+        }
+
+        ul, ol {
+            padding-left: 28px;
+        }
+
+        li {
+            margin-bottom: 14px;
+        }
+
+        .bottom-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 18px 6%;
+            border-top: 1px solid #ddd;
+        }
+
+        .slide-count {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        button {
+            border: 1px solid #1769aa;
+            border-radius: 6px;
+            padding: 11px 20px;
+            font-size: 15px;
+            cursor: pointer;
+            background: white;
+            color: #1769aa;
+        }
+
+        button.next {
+            background: #1769aa;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        @keyframes appear {
+            from {
+                opacity: 0;
+                transform: translateX(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .slide {
+                padding: 35px 22px;
+            }
+
+            h1 {
+                font-size: 29px;
+            }
+
+            h2 {
+                font-size: 22px;
+            }
+
+            p, li {
+                font-size: 16px;
+            }
+
+            p {
+                text-align: left;
+            }
+
+            .top-bar, .bottom-bar {
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            button {
+                padding: 10px 13px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div class="presentation">
+
+    <div class="top-bar">
+        <a href="index.html">← Home</a>
+        <span>Project Overview</span>
+    </div>
+
+    <div class="progress-track">
+        <div class="progress" id="progress"></div>
+    </div>
+
+    <!-- SLIDE 1 -->
+    <section class="slide active">
+        <h1>Project Overview</h1>
+
+        <p>
+            This Bachelor of Technology Project evaluates the enhancement of concrete ductility and mechanical performance through the addition of discrete, randomly oriented fibers. Standard plain concrete exhibits excellent compressive resistance but suffers from intrinsic brittleness, low tensile strength, and rapid micro-crack propagation. By incorporating fiber reinforcement, this project investigates how internal crack-bridging mechanisms arrest fracture development and transform brittle failure into pseudo-ductile, energy-absorbing post-cracking behavior.
+        </p>
+    </section>
+
+    <!-- SLIDE 2 -->
+    <section class="slide">
+        <h1>Experimental Program</h1>
+
+        <p>
+            To examine the interaction between host matrix densification and fiber dosage, the experimental program is structured across a concrete grade  and 4 distinct volume fractions as well as a control specimen :
+        </p>
+
+        <h2>Concrete Matrix Grades:</h2>
+        <ul>
+            <li>M50: Representative of high-performance infrastructure applications with a denser interfacial transition zone (ITZ).</li>
+        </ul>
+
+        <h2>Fiber Dosages:</h2>
+        <ul>
+            <li>0.5%, 0.75,1.0%, and 1.25% by total volume fraction.</li>
+        </ul>
+
+        <h2>Mechanical Testing Regimen:</h2>
+        <ul>
+            <li>Compressive Strength Test: Evaluates axial capacity, stiffness, and matrix-fiber load redistribution.</li>
+            <li>Flexural Strength Test: Evaluates modulus of rupture, first-crack strength, and post-peak flexural toughness under standard bending loads.</li>
+        </ul>
+    </section>
+
+    <!-- SLIDE 3 -->
+    <section class="slide">
+        <h1>Project Objectives</h1>
+
+        <ol>
+            <li>
+                <strong>Evaluate Baseline vs. Fiber-Reinforced Performance:</strong><br>
+                Establish the mechanical benchmark of plain M50 concrete (control specimen with 0% fiber) and quantify the relative gains in compressive and flexural capacity achieved through discrete fiber addition.
+            </li>
+
+            <li>
+                <strong>Determine the Influence of Fiber Volume Fraction ():</strong><br>
+                Systematically assess the effects of varying fiber volume fractions (0.5%, 0.75%, 1.0%, and 1.25%) on workability, peak load-carrying capacity, and cracking behavior within a high-strength M50 matrix.
+            </li>
+
+            <li>
+                <strong>Investigate Post-Cracking Ductility and Energy Dissipation:</strong><br>
+                Measure the post-peak response, first-crack strength, and flexural toughness under bending loads to evaluate how crack-bridging mechanics alter failure from brittle rupture to pseudo-ductile behavior.
+            </li>
+
+            <li>
+                <strong>Identify the Optimal Fiber Dosage:</strong><br>
+                Establish the optimal fiber volume fraction that maximizes mechanical performance (compressive strength and modulus of rupture) while mitigating dispersion, balling, and compaction challenges in high-grade concrete.
+            </li>
+        </ol>
+    </section>
+
+    <div class="bottom-bar">
+        <span class="slide-count" id="slideCount">Slide 1 of 3</span>
+
+        <div class="buttons">
+            <button id="previousBtn" onclick="changeSlide(-1)" disabled>
+                ← Previous
+            </button>
+
+            <button class="next" id="nextBtn" onclick="changeSlide(1)">
+                Next →
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const slides = document.querySelectorAll(".slide");
+    const previousBtn = document.getElementById("previousBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const slideCount = document.getElementById("slideCount");
+    const progress = document.getElementById("progress");
+
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+        });
+
+        currentSlide = index;
+
+        previousBtn.disabled = currentSlide === 0;
+
+        nextBtn.textContent =
+            currentSlide === slides.length - 1
+                ? "Next Topic →"
+                : "Next →";
+
+        slideCount.textContent =
+            `Slide ${currentSlide + 1} of ${slides.length}`;
+
+        progress.style.width =
+            `${((currentSlide + 1) / slides.length) * 100}%`;
+    }
+
+    function changeSlide(direction) {
+        if (currentSlide === slides.length - 1 && direction === 1) {
+            window.location.href = "background.html";
+            return;
+        }
+
+        const nextIndex = currentSlide + direction;
+
+        if (nextIndex >= 0 && nextIndex < slides.length) {
+            showSlide(nextIndex);
+        }
+    }
+
+    document.addEventListener("keydown", function(event) {
+        if (event.key === "ArrowRight") {
+            changeSlide(1);
+        } else if (event.key === "ArrowLeft") {
+            changeSlide(-1);
+        }
+    });
+</script>
+
+</body>
+</html>

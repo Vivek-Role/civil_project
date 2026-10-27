@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibre-Reinforced Concrete | BTP</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+
+            
+        }
+
+        
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background:
+                linear-gradient(110deg, rgba(0,0,0,.72),
+                rgba(0,0,0,.18)),
+                url("bg_image.png") center / cover fixed no-repeat;
+        }
+
+        /* Top navigation */
+        .topbar {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            z-index: 10;
+        }
+
+        /* Glass-style sidebar button */
+        .menu-btn {
+            width: 64px;
+            height: 64px;
+            border: 1px solid rgba(255,255,255,.5);
+            border-radius: 18px;
+            background: rgba(255,255,255,.16);
+            backdrop-filter: blur(12px);
+            color: white;
+            font-size: 29px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255,255,255,.3);
+            transform: scale(1.05);
+        }
+
+        /* Main page */
+        .main {
+            min-height: 100vh;
+            padding: 65px 20px 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .tag {
+            color: #8cc9ff;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            max-width: 900px;
+            font-size: clamp(32px, 5vw, 58px);
+            line-height: 1.15;
+            font-weight: 800;
+            text-shadow: 0 3px 15px rgba(0,0,0,.5);
+        }
+
+        .subtitle {
+            max-width: 650px;
+            margin: 18px 0 35px;
+            color: #020510;
+            /* font-size: clamp(14px, 2vw, 18px); */
+            /* line-height: 1.7; */
+        }
+
+        /* Navigation cards */
+        .nav-grid {
+            width: 100%;
+            max-width: 760px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .nav-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 76px;
+            padding: 17px 18px;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 14px;
+            background: rgba(255,255,255,.13);
+            /* backdrop-filter: blur(12px); */
+            color: white;
+            text-decoration: none;
+            text-align: left;
+            /* transition: .25s ease; */
+        }
+
+        .nav-card:hover {
+            background: rgba(30,130,230,.4);
+            border-color: #7dc4ff;
+            /* transform: translateY(-3px); */
+        }
+
+        .nav-icon {
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            background: rgba(60,155,255,.25);
+            color: #9bd3ff;
+            font-size: 21px;
+        }
+
+        .nav-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .arrow {
+            color: #9bd3ff;
+            font-size: 22px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #ddd;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* Sidebar */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 19;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            width: min(320px, 85vw);
+            height: 100vh;
+            padding: 28px 20px;
+            overflow-y: auto;
+            background: rgba(15,24,38,.96);
+            border-right: 1px solid rgba(255,255,255,.15);
+            backdrop-filter: blur(18px);
+            transform: translateX(-100%);
+            transition: transform .3s ease;
+        }
+
+        body.sidebar-open .sidebar {
+            transform: translateX(0);
+        }
+
+        body.sidebar-open .overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 21px;
+        }
+
+        .close-btn {
+            color: white;
+            background: transparent;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .sidebar-subtitle {
+            color: #aab7c8;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .side-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 14px 12px;
+            margin-bottom: 7px;
+            border-radius: 10px;
+            color: #e5edf8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .side-link:hover {
+            background: rgba(64,150,255,.2);
+            color: #8cc9ff;
+        }
+
+        .side-number {
+            color: #8cc9ff;
+            font-size: 12px;
+            min-width: 22px;
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                top: 16px;
+                left: 16px;
+            }
+
+            .menu-btn {
+                width: 52px;
+                height: 52px;
+            }
+
+            .main {
+                padding: 95px 18px 35px;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+            }
+
+            .nav-card {
+                min-height: 65px;
+            }
+
+            .tag {
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+            }
+        }
+        
+/* Project Credits Footer */
+
+.project-credits {
+    width: 100%;
+    max-width: 1150px;
+    margin: 55px auto 0;
+    padding: 25px 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    text-align: center;
+}
+
+.credit-column {
+    padding: 5px 20px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.credit-column + .credit-column {
+    border-left: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.credit-label {
+    display: block;
+    color: #79baff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.credit-column h2 {
+    color: white;
+    font-size: clamp(14px, 1.7vw, 23px);
+    font-weight: 700;
+    line-height: 1.5;
+    white-space: nowrap;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .project-credits {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 35px;
+    }
+
+    .credit-column {
+        padding: 10px;
+    }
+
+    .credit-column + .credit-column {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+        padding-top: 20px;
+    }
+
+    .credit-label {
+        font-size: 12px;
+    }
+
+
+}
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Hamburger menu -->
+    <div class="topbar">
+        <button class="menu-btn"
+                id="menuBtn"
+                aria-label="Open sidebar"
+                aria-expanded="false"
+                aria-controls="sidebar">
+            ☰
+        </button>
+    </div>
+
+    <!-- Dark overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div class="sidebar-header">
+            <h2>Project Menu</h2>
+            <button class="close-btn" id="closeBtn"
+                    aria-label="Close sidebar">×</button>
+        </div>
+
+        <p class="sidebar-subtitle">
+            B.Tech Project<br>
+            Fibre-Reinforced Concrete
+        </p>
+
+        <nav>
+            <a href="overview.html" class="side-link">
+                <span class="side-number">01</span> Overview
+            </a>
+
+            <a href="background.html" class="side-link">
+                <span class="side-number">02</span> Background
+            </a>
+
+            <a href="fibre.html" class="side-link">
+                <span class="side-number">03</span> Fibre-Reinforced Concrete
+            </a>
+
+
+            <a href="compressive.html" class="side-link">
+                <span class="side-number">05</span> Compressive Strength Test
+            </a>
+
+            <a href="flexural.html" class="side-link">
+                <span class="side-number">06</span> Flexural Strength Test
+            </a>
+
+            <a href="conclusion.html" class="side-link">
+                <span class="side-number">07</span> Conclusion
+            </a>
+
+            <a href="acknowledgement.html" class="side-link">
+                <span class="side-number">08</span> Acknowledgement
+            </a>
+            
+        </nav>
+    </aside>
+
+    <!-- Homepage -->
+    <main class="main">
+
+        <div class="tag">BACHELOR OF TECHNOLOGY PROJECT</div>
+
+        <h1>Fibre-Reinforced Concrete</h1>
+
+        <h2 class="subtitle ">
+            & its Mechanical Properties
+        </h2>
+
+        <div class="nav-grid">
+
+            <a href="overview.html" class="nav-card">
+                <span class="nav-text">OVERVIEW</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="background.html" class="nav-card">
+                <span class="nav-text">BACKGROUND</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="fibre.html" class="nav-card">
+                <span class="nav-text">FIBRE-REINFORCED CONCRETE</span>
+                <span class="arrow">›</span>
+            </a>
+
+
+            <a href="compressive.html" class="nav-card">
+                <span class="nav-text">COMPRESSIVE STRENGTH TEST</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="flexural.html" class="nav-card">
+                <span class="nav-text">FLEXURAL STRENGTH TEST</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="conclusion.html" class="nav-card">
+                <span class="nav-text">CONCLUSION</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <!-- <a href="acknowledgement.html" class="display: flex;
+            align-items: center,
+            gap: 14px,
+            min-height: 76px,
+            padding: 17px 18px,            
+            color: white,
+            text-decoration: none,
+            text-align: center,">
+                <span class="nav-text">ACKNOWLEDGEMENT</span>
+                <span class="arrow">›</span>
+            </a> -->
+<!-- <a href="acknowledgement.html" style=" display: flex; align-items: center; gap: 14px; min-height: 76px; padding: 17px 18px; color: rgb(190, 185, 185); text-decoration: none; text-align: center; font-size: 40px ;">
+    <span class="nav-text">ACKNOWLEDGEMENT</span>
+    <span class="arrow">›</span>
+</a> -->
+<a href="acknowledgement.html" style="
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 76px;
+    padding: 17px 18px;
+    color: rgb(190, 185, 185);
+    text-decoration: none;
+    text-align: center;
+    font-size: 100px;
+    font-family: 'Georgia', serif;
+">
+    <span class="nav-text">ACKNOWLEDGEMENT</span>
+    <span class="arrow">›</span>
+</a>
+        </a>
+
+        </div>
+
+        
+        <!-- <h3>PROJECT INFORMATION</h3> -->
+
+ 
+
+    
+<!-- Project Credits Footer -->
+<footer class="project-credits">
+
+    <div class="credit-column">
+        <span class="credit-label">GUIDED BY</span>
+        <h2>Dr. RAHUL BHARATIYA</h2>
+    </div>
+
+    <div class="credit-column">
+        <span class="credit-label">PROJECT BY</span>
+        <h2>ATLURI KARTHIKEYAN REDDY</h2>
+        <h2>23JE0138</h2>
+        <h2>SAURAV KUMAR</h2>
+        <h2>23JE0891</h2>
+    </div>
+    
+    <div class="credit-column">
+        <span class="credit-label">ASSISTED BY</span>
+        <h2>NIKHIL GHATAK</h2>
+        <h2>23DR</h2>
+    </div>
+
+</footer>
+
+
+    </main>
+
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const closeBtn = document.getElementById("closeBtn");
+        const overlay = document.getElementById("overlay");
+
+        function openSidebar() {
+            document.body.classList.add("sidebar-open");
+            menuBtn.setAttribute("aria-expanded", "true");
+        }
+
+        function closeSidebar() {
+            document.body.classList.remove("sidebar-open");
+            menuBtn.setAttribute("aria-expanded", "false");
+        }
+
+        menuBtn.addEventListener("click", openSidebar);
+        closeBtn.addEventListener("click", closeSidebar);
+        overlay.addEventListener("click", closeSidebar);
+
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeSidebar();
+            }
+        });
+    </script>
+
+</body>
+</html>
