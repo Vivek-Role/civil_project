@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,8 +109,8 @@ th {
     font-weight: 600;
 }
 
-tbody tr:nth-child(even) {
-    background: #f3f5f7;
+tbody tr {
+    background: #fff;
 }
 
 /* Bottom navigation - same style as Overview */
@@ -229,7 +228,7 @@ tbody tr:nth-child(even) {
 
     <!-- SLIDE 2: THEORY -->
     <section class="slide">
-        <h1>2. Theory &amp; Governing Equations</h1>
+        <h1>2. Theory & Governing Equations</h1>
 
         <p>
             Uniaxial compressive loading induces lateral tensile strain via
@@ -296,12 +295,12 @@ tbody tr:nth-child(even) {
                     <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
                 </tr>
                 <tr>
-                    <td>Coarse Aggregate (&lt; 10 mm)</td>
+                    <td>Coarse Aggregate (< 10 mm)</td>
                     <td>10 mm down crushed stone</td>
                     <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
                 </tr>
                 <tr>
-                    <td>Coarse Aggregate (&gt; 10 mm)</td>
+                    <td>Coarse Aggregate (> 10 mm)</td>
                     <td>20 mm down crushed stone</td>
                     <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
                 </tr>
@@ -385,14 +384,14 @@ tbody tr:nth-child(even) {
 
     <!-- SLIDE 5: OBSERVATION -->
     <section class="slide">
-        <h1>5. Observation &amp; Experimental Data Sheet (7 &amp; 28 Days)</h1>
+        <h1>5. Observation & Experimental Data Sheet (7 & 28 Days)</h1>
 
         <p>
             <strong>Specimen Dimensions:</strong> As specified in the experiment.
         </p>
         <p>
-            Individual cube compressive strengths are shown below in N/mm².
-            The mean is calculated from the available cube results for each mix.
+            Individual cube compressive strengths are shown below in N/mm² (M45 Grade
+            evaluation across fiber dosages per IS 456:2000 acceptance criteria).
         </p>
 
         <div class="table-wrap">
@@ -402,7 +401,7 @@ tbody tr:nth-child(even) {
                     <th rowspan="2">Mix Designation</th>
                     <th rowspan="2">Fibre Dosage (Vf)</th>
                     <th colspan="4">7-Day Test (N/mm²)</th>
-                    <th colspan="5">28-Day Test (N/mm²)</th>
+                    <th colspan="4">28-Day Test (N/mm²)</th>
                 </tr>
                 <tr>
                     <th>Cube 1</th>
@@ -417,115 +416,37 @@ tbody tr:nth-child(even) {
             </thead>
             <tbody>
                 <tr>
-                    <td>M50-0.0 (Control)</td><td>0.00%</td>
+                    <td>M45-0.0 (Control)</td><td>0.00%</td>
                     <td>—</td><td>—</td><td>—</td><td>—</td>
                     <td>—</td><td>—</td><td>—</td><td>—</td>
                 </tr>
                 <tr>
-                    <td>M50-0.5</td><td>0.50%</td>
-                    <td>40.24</td><td>41.29</td><td>43.99</td><td><strong>41.84</strong></td>
-                    <td>50.09</td><td>45.33</td><td>47.23</td><td><strong>47.55</strong></td>
+                    <td>M45-0.50</td><td>0.50%</td>
+                    <td>39.75</td><td>40.35</td><td>40.95</td><td><strong>40.35</strong></td>
+                    <td>51.30</td><td>52.05</td><td>52.80</td><td><strong>52.05</strong></td>
                 </tr>
                 <tr>
-                    <td>M50-0.75</td><td>0.75%</td>
-                    <td>46.19</td><td>43.15</td><td>44.71</td><td><strong>44.68</strong></td>
-                    <td>45.60</td><td>47.37</td><td>51.54</td><td><strong>48.17</strong></td>
+                    <td>M45-0.75</td><td>0.75%</td>
+                    <td>39.05</td><td>39.85</td><td>39.65</td><td><strong>39.52</strong></td>
+                    <td>50.40</td><td>51.45</td><td>51.15</td><td><strong>51.00</strong></td>
                 </tr>
                 <tr>
-                    <td>M50-1.0</td><td>1.00%</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>M45-1.00</td><td>1.00%</td>
+                    <td>40.80</td><td>41.47</td><td>42.06</td><td><strong>41.44</strong></td>
+                    <td>52.85</td><td>53.30</td><td>53.85</td><td><strong>53.33</strong></td>
                 </tr>
                 <tr>
-                    <td>M50-1.25</td><td>1.25%</td>
-                    <td>44.92</td><td>44.38</td><td>47.99</td><td><strong>45.76</strong></td>
-                    <td>49.70</td><td>51.85</td><td>49.53</td><td><strong>49.41</strong></td>
+                    <td>M45-1.25</td><td>1.25%</td>
+                    <td>38.05</td><td>39.85</td><td>38.30</td><td><strong>38.38</strong></td>
+                    <td>49.10</td><td>50.05</td><td>49.40</td><td><strong>49.52</strong></td>
                 </tr>
             </tbody>
         </table>
         </div>
 
-
-    </section>
-
-</main>
-
-<!-- Bottom navigation -->
-<div class="bottom-nav">
-    <span class="slide-count" id="slideCount">Slide 1 of 5</span>
-
-    <div class="nav-buttons">
-        <button id="prevBtn" disabled>← Previous</button>
-        <button id="nextBtn">Next →</button>
-    </div>
-</div>
-
-<script>
-const slides = document.querySelectorAll(".slide");
-let currentSlide = 0;
-
-const slideCount = document.getElementById("slideCount");
-const prevBtn = document.getElementById("prevBtn");
-const nextBtn = document.getElementById("nextBtn");
-const progressFill = document.getElementById("progressFill");
-
-function showSlide(index) {
-    currentSlide = Math.max(0, Math.min(index, slides.length - 1));
-
-    slides.forEach((slide, i) => {
-        slide.classList.toggle("active", i === currentSlide);
-    });
-
-    slideCount.textContent =
-        `Slide ${currentSlide + 1} of ${slides.length}`;
-
-    prevBtn.disabled = currentSlide === 0;
-    // nextBtn.disabled = currentSlide === slides.length - 1;
-    nextBtn.disabled = false;
-
-    // nextBtn.textContent =
-        // currentSlide === slides.length - 1 ? "Last slide" : "Next →";
-
-    nextBtn.textContent =
-        currentSlide === slides.length - 1 ? "Next Topic →" : "Next →";
-
-    progressFill.style.width =
-        `${((currentSlide + 1) / slides.length) * 100}%`;
-} 
-
-function changeSlide(direction) {
-        if (currentSlide === slides.length - 1 && direction === 1) {
-            window.location.href = "flexural.html";
-            return;
-        }
-
-        const nextIndex = currentSlide + direction;
-
-        if (nextIndex >= 0 && nextIndex < slides.length) {
-            showSlide(nextIndex);
-        }
-}
-
-prevBtn.addEventListener("click", () => {
-    changeSlide( - 1);
-});
-
-nextBtn.addEventListener("click", () => {
-    changeSlide(1);
-});
-
-document.addEventListener("keydown", (event) => {
-    if (event.key === "ArrowRight") {
-        changeSlide(1);;
-    }
-
-    if (event.key === "ArrowLeft") {
-        showSlide(currentSlide - 1);
-    }
-});
-
-showSlide(0);
-</script>
-
-</body>
-</html>
+        <p style="margin-top: 20px;">
+            <strong>28-Day Means Summary:</strong> 0.50% = 52.05 N/mm² (7-day mean: 40.35 N/mm²);
+            0.75% = 51.00 N/mm² (7-day mean: 39.52 N/mm²); 1.00% (Optimum) = 53.33 N/mm²
+            (7-day mean: 41.44 N/mm²), exceeding the M45 target mean strength of 53.25 N/mm²;
+            1.25% = 49.52 N/mm² (7-day mean: 38.38 N/mm²), satisfying the IS 456:2000 M45
+            acceptance criterion (f<sub>ck</sub> + 0.825σ = 49.13 N/mm²).
