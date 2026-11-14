@@ -1,1845 +1,534 @@
+
+
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fibre-Reinforced Concrete &amp; its Mechanical Properties — B.Tech Project</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibre-Reinforced Concrete | BTP</title>
 
-  <!-- Google Fonts: Plus Jakarta Sans (Headings), Inter (Body), JetBrains Mono (Indices & Roll Numbers) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
 
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            display: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            alabaster: '#F8FAFC',
-            cobalt: {
-              DEFAULT: '#0F3D6E',
-              bright: '#1D5BA6',
-              tint: '#EFF6FF',
-            },
-            brass: {
-              DEFAULT: '#B45309',
-              light: '#FEF3C7',
-              border: '#FDE68A',
-            }
-          }
+            
         }
-      }
-    };
-  </script>
 
-  <style>
-    /* ==========================================================================
-       ARCHITECTURAL MONOGRAPH DESIGN TOKENS & SUBTLE DRAFTING BACKGROUND
-       ========================================================================== */
-    :root {
-      --bg-canvas: #F8FAFC;
-      --bg-card: #FFFFFF;
-      --border-hairline: #E2E8F0;
-      --navy-primary: #0F3D6E;
-      --royal-accent: #1D5BA6;
-      --brass-fibre: #B45309;
-      --ink-heading: #0F172A;
-      --ink-body: #475569;
+        
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: white;
+            background:
+                linear-gradient(110deg, rgba(0,0,0,.72),
+                rgba(0,0,0,.18)),
+                url("bg_image.png") center / cover fixed no-repeat;
+        }
+
+        /* Top navigation */
+        .topbar {
+            position: absolute;
+            top: 25px;
+            left: 30px;
+            z-index: 10;
+        }
+
+        /* Glass-style sidebar button */
+        .menu-btn {
+            width: 64px;
+            height: 64px;
+            border: 1px solid rgba(255,255,255,.5);
+            border-radius: 18px;
+            background: rgba(255,255,255,.16);
+            backdrop-filter: blur(12px);
+            color: white;
+            font-size: 29px;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .menu-btn:hover {
+            background: rgba(255,255,255,.3);
+            transform: scale(1.05);
+        }
+
+        /* Main page */
+        .main {
+            min-height: 100vh;
+            padding: 65px 20px 45px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .tag {
+            color: #8cc9ff;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 4px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            max-width: 900px;
+            font-size: clamp(32px, 5vw, 58px);
+            line-height: 1.15;
+            font-weight: 800;
+            text-shadow: 0 3px 15px rgba(0,0,0,.5);
+        }
+
+        .subtitle {
+            max-width: 650px;
+            margin: 18px 0 35px;
+            color: #020510;
+            /* font-size: clamp(14px, 2vw, 18px); */
+            /* line-height: 1.7; */
+        }
+
+        /* Navigation cards */
+        .nav-grid {
+            width: 100%;
+            max-width: 760px;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .nav-card {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-height: 76px;
+            padding: 17px 18px;
+            border: 1px solid rgba(255,255,255,.3);
+            border-radius: 14px;
+            background: rgba(255,255,255,.13);
+            /* backdrop-filter: blur(12px); */
+            color: white;
+            text-decoration: none;
+            text-align: left;
+            /* transition: .25s ease; */
+        }
+
+        .nav-card:hover {
+            background: rgba(30,130,230,.4);
+            border-color: #7dc4ff;
+            /* transform: translateY(-3px); */
+        }
+
+        .nav-icon {
+            flex-shrink: 0;
+            display: grid;
+            place-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 11px;
+            background: rgba(60,155,255,.25);
+            color: #9bd3ff;
+            font-size: 21px;
+        }
+
+        .nav-text {
+            flex: 1;
+            font-size: 14px;
+            font-weight: bold;
+            line-height: 1.4;
+        }
+
+        .arrow {
+            color: #9bd3ff;
+            font-size: 22px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            color: #ddd;
+            font-size: 12px;
+            letter-spacing: 1px;
+        }
+
+        /* Sidebar */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,.55);
+            z-index: 19;
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 20;
+            width: min(320px, 85vw);
+            height: 100vh;
+            padding: 28px 20px;
+            overflow-y: auto;
+            background: rgba(15,24,38,.96);
+            border-right: 1px solid rgba(255,255,255,.15);
+            backdrop-filter: blur(18px);
+            transform: translateX(-100%);
+            transition: transform .3s ease;
+        }
+
+        body.sidebar-open .sidebar {
+            transform: translateX(0);
+        }
+
+        body.sidebar-open .overlay {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-header h2 {
+            font-size: 21px;
+        }
+
+        .close-btn {
+            color: white;
+            background: transparent;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+        .sidebar-subtitle {
+            color: #aab7c8;
+            font-size: 12px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .side-link {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            padding: 14px 12px;
+            margin-bottom: 7px;
+            border-radius: 10px;
+            color: #e5edf8;
+            text-decoration: none;
+            font-size: 14px;
+            transition: .2s;
+        }
+
+        .side-link:hover {
+            background: rgba(64,150,255,.2);
+            color: #8cc9ff;
+        }
+
+        .side-number {
+            color: #8cc9ff;
+            font-size: 12px;
+            min-width: 22px;
+        }
+
+        @media (max-width: 600px) {
+            .topbar {
+                top: 16px;
+                left: 16px;
+            }
+
+            .menu-btn {
+                width: 52px;
+                height: 52px;
+            }
+
+            .main {
+                padding: 95px 18px 35px;
+            }
+
+            .nav-grid {
+                grid-template-columns: 1fr;
+                max-width: 420px;
+            }
+
+            .nav-card {
+                min-height: 65px;
+            }
+
+            .tag {
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                transition: none !important;
+            }
+        }
+        
+/* Project Credits Footer */
+
+.project-credits {
+    width: 100%;
+    max-width: 1150px;
+    margin: 55px auto 0;
+    padding: 25px 10px 10px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: stretch;
+    text-align: center;
+}
+
+.credit-column {
+    padding: 5px 20px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.credit-column + .credit-column {
+    border-left: 1px solid rgba(255, 255, 255, 0.75);
+}
+
+.credit-label {
+    display: block;
+    color: #79baff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.credit-column h2 {
+    color: white;
+    font-size: clamp(14px, 1.7vw, 23px);
+    font-weight: 700;
+    line-height: 1.5;
+    white-space: nowrap;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .project-credits {
+        grid-template-columns: 1fr;
+        gap: 22px;
+        margin-top: 35px;
     }
 
-    html, body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-color: var(--bg-canvas);
-      color: var(--ink-heading);
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-      -webkit-font-smoothing: antialiased;
+    .credit-column {
+        padding: 10px;
     }
 
-    h1, h2, h3, h4, .font-heading {
-      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    .credit-column + .credit-column {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.35);
+        padding-top: 20px;
     }
 
-    /* Faint Architectural Concrete Stipple & Structural Drafting Grid for Hero */
-    .hero-architectural-grid {
-      background-color: #F8FAFC;
-      background-image:
-        radial-gradient(rgba(15, 61, 110, 0.055) 1px, transparent 1px),
-        linear-gradient(to right, rgba(15, 61, 110, 0.03) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(15, 61, 110, 0.03) 1px, transparent 1px);
-      background-size: 20px 20px, 80px 80px, 80px 80px;
-      background-position: -1px -1px, 0 0, 0 0;
+    .credit-label {
+        font-size: 12px;
     }
 
-    /* Elevated Crisp Monograph Card */
-    .arch-card {
-      background-color: var(--bg-card);
-      border: 1px solid var(--border-hairline);
-      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 6px 24px -6px rgba(15, 23, 42, 0.04);
-      transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
-    }
 
-    .arch-card-interactive:hover {
-      border-color: #93C5FD;
-      box-shadow: 0 8px 28px -6px rgba(15, 61, 110, 0.09);
-      transform: translateY(-2px);
-    }
+}
 
-    /* Gentle Fade-Up Entrance for Views & Slides */
-    @keyframes calmFadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .view-fade-enter {
-      animation: calmFadeUp 0.28s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-  </style>
+    </style>
 </head>
-<body class="flex flex-col min-h-screen selection:bg-blue-100 selection:text-[#0F3D6E]">
 
-  <!-- ========================================================================
-       1. TOP NAVIGATION BAR (Clean, Sticky, Minimal, 64px Height)
-       ======================================================================== -->
-  <header id="site-header" class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
-    <!-- Rendered dynamically for Home View vs. Slide Presentation View -->
-    <div id="header-inner" class="max-w-6xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4"></div>
+<body>
 
-    <!-- 3px Royal-Blue Chapter Progress Bar (Active in Presentation View) -->
-    <div id="header-progress-track" class="hidden w-full h-[3px] bg-slate-100 overflow-hidden">
-      <div id="header-progress-fill" class="h-full bg-[#1D5BA6] transition-all duration-300 ease-out" style="width: 33.33%;"></div>
+    <!-- Hamburger menu -->
+    <div class="topbar">
+        <button class="menu-btn"
+                id="menuBtn"
+                aria-label="Open sidebar"
+                aria-expanded="false"
+                aria-controls="sidebar">
+            ☰
+        </button>
     </div>
-  </header>
 
-  <!-- ========================================================================
-       2. MAIN APPLICATION VIEWPORT (Home Page OR Centered Slide Canvas)
-       ======================================================================== -->
-  <main id="app-viewport" class="flex-1 flex flex-col">
-    <!-- Injected cleanly by renderApp() -->
-  </main>
+    <!-- Dark overlay -->
+    <div class="overlay" id="overlay"></div>
 
-  <!-- ========================================================================
-       3. PRESENTATION BOTTOM NAVIGATION BAR (Shown only in Slide Reader Mode)
-       ======================================================================== -->
-  <footer id="presentation-footer" class="hidden sticky bottom-0 z-30 bg-white/95 backdrop-blur-md border-t border-slate-200">
-    <div class="max-w-4xl mx-auto px-4 sm:px-8 h-16 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <span id="slide-counter-text" class="font-mono text-xs sm:text-sm font-medium text-slate-600">
-          Slide 1 of 3
-        </span>
-        <span class="hidden sm:inline-block font-mono text-[11px] text-slate-400 border border-slate-200 rounded px-2 py-0.5">
-          ← / → keys
-        </span>
-      </div>
-
-      <div class="flex items-center gap-2.5 sm:gap-3">
-        <button id="btn-prev-slide" type="button" onclick="prevSlide()"
-                class="px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border transition min-h-[40px]">
-          ← Previous
-        </button>
-
-        <button id="btn-next-slide" type="button" onclick="nextSlide()"
-                class="px-5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-[#0F3D6E] hover:bg-[#1D5BA6] text-white transition min-h-[40px] cursor-pointer shadow-sm">
-          <span id="btn-next-label">Next →</span>
-        </button>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ========================================================================
-       4. CLEAN CODE EXPORT MODAL ("Get Website Code")
-       ======================================================================== -->
-  <div id="code-export-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/50 backdrop-blur-xs">
-    <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-3xl shadow-2xl overflow-hidden view-fade-enter">
-      
-      <!-- Modal Header -->
-      <div class="px-6 py-4 border-b border-slate-200 flex items-center justify-between">
-        <div>
-          <span class="font-mono text-[11px] uppercase tracking-wider text-[#B45309] font-semibold">
-            Vercel Deployment Ready
-          </span>
-          <h3 class="text-lg font-bold text-slate-900">Get Website Code</h3>
-        </div>
-        <button type="button" onclick="closeCodeModal()" aria-label="Close modal"
-                class="p-2 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer">
-          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
-
-      <!-- Modal Body -->
-      <div class="p-6 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <!-- File Tabs -->
-          <div class="inline-flex p-1 rounded-xl bg-slate-100 border border-slate-200">
-            <button type="button" id="tab-code-html" onclick="switchCodeTab('html')"
-                    class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-white text-[#0F3D6E] shadow-xs transition cursor-pointer">
-              index.html (Complete Single-File)
-            </button>
-            <button type="button" id="tab-code-css" onclick="switchCodeTab('css')"
-                    class="px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer">
-              styles.css (Design Tokens)
-            </button>
-          </div>
-
-          <button type="button" onclick="copyActiveCodeSnippet()"
-                  class="px-4 py-2 rounded-lg bg-[#0F3D6E] hover:bg-[#1D5BA6] text-white text-xs font-semibold flex items-center gap-1.5 transition cursor-pointer">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-            </svg>
-            <span id="copy-code-btn-label">Copy Code</span>
-          </button>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar" aria-label="Main navigation">
+        <div class="sidebar-header">
+            <h2>Project Menu</h2>
+            <button class="close-btn" id="closeBtn"
+                    aria-label="Close sidebar">×</button>
         </div>
 
-        <p id="code-tab-helper" class="text-xs text-slate-600">
-          This complete, dependency-free single-file <code class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">index.html</code> includes the Home page, all 7 project chapters, and architectural SVG schematics.
+        <p class="sidebar-subtitle">
+            B.Tech Project<br>
+            Fibre-Reinforced Concrete
         </p>
 
-        <div class="rounded-xl border border-slate-200 bg-slate-950 text-slate-200 overflow-hidden">
-          <pre class="p-4 text-xs font-mono overflow-auto max-h-[46vh] leading-relaxed"><code id="code-snippet-container"></code></pre>
-        </div>
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="px-6 py-3.5 bg-slate-50 border-t border-slate-200 flex items-center justify-between">
-        <span id="copy-feedback-text" class="text-xs font-medium text-emerald-700 opacity-0 transition-opacity">
-          ✓ Copied to clipboard! Ready to paste into your repository.
-        </span>
-        <button type="button" onclick="closeCodeModal()"
-                class="px-4 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-xs font-semibold text-slate-700 transition cursor-pointer">
-          Close
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- ========================================================================
-       5. APPLICATION DATA & CLEAN NAVIGATION CONTROLLER
-       ======================================================================== -->
-  <script>
-    /**
-     * ALL 7 CHAPTERS & SLIDES DATA
-     * Uncluttered, accurate civil engineering content tailored to M50 Fibre-Reinforced Concrete
-     */
-    const CHAPTERS = [
-      {
-        id: '01',
-        number: '01',
-        title: 'Overview',
-        summary: 'Research motivation, M50 experimental program, and core project objectives.',
-        slides: [
-          {
-            eyebrow: '01 / OVERVIEW · SLIDE 1 OF 3',
-            title: 'Project Overview',
-            render: () => `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <!-- Left: Exact Verified Overview Text -->
-                <div class="lg:col-span-6 space-y-5">
-                  <p class="text-base sm:text-[17px] text-slate-700 leading-[1.78]">
-                    This Bachelor of Technology Project evaluates the enhancement of concrete ductility and mechanical performance through the addition of discrete, randomly oriented fibers. Standard plain concrete exhibits excellent compressive resistance but suffers from intrinsic brittleness, low tensile strength, and rapid micro-crack propagation. By incorporating fiber reinforcement, this project investigates how internal crack-bridging mechanisms arrest fracture development and transform brittle failure into pseudo-ductile, energy-absorbing post-cracking behavior.
-                  </p>
-
-                  <div class="grid grid-cols-2 gap-3 pt-2">
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div class="font-mono text-[11px] uppercase tracking-wider text-slate-500">Plain M50 Matrix</div>
-                      <div class="text-sm font-bold text-slate-900 mt-1">Brittle Fracture</div>
-                      <p class="text-xs text-slate-600 mt-1">Unarrested micro-crack propagation once tensile limit is reached.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-amber-50/60 border border-amber-200/80">
-                      <div class="font-mono text-[11px] uppercase tracking-wider text-[#B45309] font-semibold">FRC Composite</div>
-                      <div class="text-sm font-bold text-slate-900 mt-1">Pseudo-Ductile</div>
-                      <p class="text-xs text-slate-600 mt-1">Discrete fibres bridge crack faces and absorb post-peak energy.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Right: Clean Static Comparative SVG Diagram -->
-                <div class="lg:col-span-6">
-                  <div class="arch-card rounded-2xl p-5 sm:p-6">
-                    <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
-                      <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
-                        Comparative Fracture Mechanics
-                      </span>
-                      <span class="font-mono text-[11px] text-[#0F3D6E] font-medium">Tension Zone</span>
-                    </div>
-
-                    <svg viewBox="0 0 460 280" class="w-full h-auto block" role="img" aria-label="Comparison between Plain Concrete brittle rupture and Fibre-Reinforced Concrete crack bridging">
-                      <!-- Top Panel: Plain Concrete -->
-                      <g transform="translate(0, 4)">
-                        <text x="12" y="16" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F172A">
-                          A. Plain Concrete (Sudden Brittle Rupture)
-                        </text>
-                        <!-- Left & Right Separated Halves -->
-                        <polygon points="36,30 222,30 218,62 225,92 217,118 36,118" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2" />
-                        <polygon points="238,30 424,30 424,118 233,118 241,92 234,62" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2" />
-                        <!-- Aggregates -->
-                        <circle cx="82" cy="64" r="9" fill="#CBD5E1" />
-                        <circle cx="154" cy="92" r="11" fill="#CBD5E1" />
-                        <circle cx="312" cy="58" r="10" fill="#CBD5E1" />
-                        <circle cx="376" cy="88" r="9" fill="#CBD5E1" />
-                        <!-- Unarrested Full-Depth Crack -->
-                        <path d="M230,30 L226,62 L233,92 L225,118" fill="none" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="4,3" />
-                        <!-- Outward Tensile Arrows -->
-                        <line x1="28" y1="74" x2="8" y2="74" stroke="#64748B" stroke-width="1.8" />
-                        <polyline points="14,69 8,74 14,79" fill="none" stroke="#64748B" stroke-width="1.8" />
-                        <line x1="432" y1="74" x2="452" y2="74" stroke="#64748B" stroke-width="1.8" />
-                        <polyline points="446,69 452,74 446,79" fill="none" stroke="#64748B" stroke-width="1.8" />
-                      </g>
-
-                      <!-- Divider -->
-                      <line x1="12" y1="142" x2="448" y2="142" stroke="#E2E8F0" stroke-width="1" />
-
-                      <!-- Bottom Panel: Fibre-Reinforced Concrete -->
-                      <g transform="translate(0, 152)">
-                        <text x="12" y="16" font-family="Plus Jakarta Sans, sans-serif" font-size="12" font-weight="700" fill="#0F3D6E">
-                          B. Fibre-Reinforced Concrete (Crack-Bridging Pseudo-Ductility)
-                        </text>
-                        <!-- Intact Concrete Block with Hairline Crack -->
-                        <rect x="36" y="30" width="388" height="88" rx="3" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2" />
-                        <!-- Aggregates -->
-                        <circle cx="88" cy="60" r="9" fill="#CBD5E1" />
-                        <circle cx="152" cy="94" r="10" fill="#CBD5E1" />
-                        <circle cx="318" cy="62" r="10" fill="#CBD5E1" />
-                        <circle cx="378" cy="92" r="8" fill="#CBD5E1" />
-                        <!-- Arrested Hairline Crack from Bottom -->
-                        <polyline points="230,118 227,96 232,76 229,62" fill="none" stroke="#B45309" stroke-width="2" />
-                        <!-- Matrix Embedded Fibres -->
-                        <polyline points="96,86 122,82" fill="none" stroke="#475569" stroke-width="1.8" stroke-linecap="round" />
-                        <polyline points="164,52 188,60" fill="none" stroke="#475569" stroke-width="1.8" stroke-linecap="round" />
-                        <polyline points="282,92 308,86" fill="none" stroke="#475569" stroke-width="1.8" stroke-linecap="round" />
-                        <polyline points="348,50 374,56" fill="none" stroke="#475569" stroke-width="1.8" stroke-linecap="round" />
-                        <!-- Highlighted Brass Crack-Bridging Fibres -->
-                        <g stroke="#B45309" stroke-width="2.6" stroke-linecap="round" fill="none">
-                          <polyline points="205,74 210,78 250,74 255,78" />
-                          <polyline points="204,95 209,91 251,95 256,91" />
-                          <polyline points="206,110 211,107 249,111 254,108" />
-                        </g>
-                        <!-- Stress Transfer Arrows -->
-                        <line x1="28" y1="74" x2="8" y2="74" stroke="#0F3D6E" stroke-width="1.8" />
-                        <polyline points="14,69 8,74 14,79" fill="none" stroke="#0F3D6E" stroke-width="1.8" />
-                        <line x1="432" y1="74" x2="452" y2="74" stroke="#0F3D6E" stroke-width="1.8" />
-                        <polyline points="446,69 452,74 446,79" fill="none" stroke="#0F3D6E" stroke-width="1.8" />
-                      </g>
-                    </svg>
-                  </div>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '01 / OVERVIEW · SLIDE 2 OF 3',
-            title: 'Experimental Program',
-            render: () => `
-              <div class="space-y-6">
-                <p class="text-base text-slate-700 leading-relaxed max-w-3xl">
-                  To examine the interaction between host matrix densification and fiber dosage, the experimental program is structured across a concrete grade and 4 distinct volume fractions as well as a control specimen :
-                </p>
-
-                <!-- 3 Structured Clean Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <!-- Card 1: Concrete Matrix Grades -->
-                  <div class="arch-card rounded-2xl p-5 border-t-2 border-t-[#0F3D6E]">
-                    <div class="font-mono text-xs uppercase tracking-wider text-[#0F3D6E] font-semibold">
-                      Concrete Matrix Grades
-                    </div>
-                    <div class="text-2xl font-extrabold text-slate-900 mt-1.5 font-mono">M50</div>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Representative of high-performance infrastructure applications with a denser interfacial transition zone (ITZ).
-                    </p>
-                  </div>
-
-                  <!-- Card 2: Fiber Dosages -->
-                  <div class="arch-card rounded-2xl p-5 border-t-2 border-t-[#B45309]">
-                    <div class="font-mono text-xs uppercase tracking-wider text-[#B45309] font-semibold">
-                      Fiber Dosages
-                    </div>
-                    <div class="text-lg font-extrabold text-slate-900 mt-1.5 font-mono">
-                      0.5%, 0.75%, 1.0%, 1.25%
-                    </div>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Evaluated by total volume fraction (V<sub>f</sub>) alongside a plain M50 control specimen (0.0% fiber).
-                    </p>
-                  </div>
-
-                  <!-- Card 3: Mechanical Testing Regimen -->
-                  <div class="arch-card rounded-2xl p-5 border-t-2 border-t-[#1D5BA6]">
-                    <div class="font-mono text-xs uppercase tracking-wider text-[#1D5BA6] font-semibold">
-                      Mechanical Testing Regimen
-                    </div>
-                    <div class="text-lg font-extrabold text-slate-900 mt-1.5">
-                      Compression &amp; Flexure
-                    </div>
-                    <ul class="text-xs text-slate-600 mt-2 space-y-1.5 leading-relaxed">
-                      <li><strong>Compressive Strength Test:</strong> Evaluates axial capacity, stiffness, and matrix-fiber load redistribution.</li>
-                      <li><strong>Flexural Strength Test:</strong> Evaluates modulus of rupture, first-crack strength, and post-peak flexural toughness under standard bending loads.</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <!-- Clean 5-Row Mix Matrix Summary Table -->
-                <div class="arch-card rounded-2xl overflow-hidden">
-                  <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                    <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700">
-                      Experimental Mix Matrix (M50 Host Matrix)
-                    </span>
-                    <span class="font-mono text-xs text-slate-500">5 Mix Proportions</span>
-                  </div>
-                  <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                      <thead>
-                        <tr class="border-b border-slate-200 text-xs font-mono uppercase text-slate-500 bg-white">
-                          <th class="py-3 px-5">Mix ID</th>
-                          <th class="py-3 px-5">Matrix Grade</th>
-                          <th class="py-3 px-5">Fibre Volume Fraction (V<sub>f</sub>)</th>
-                          <th class="py-3 px-5">Structural Purpose</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-slate-100 text-slate-700">
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold text-slate-900">M50-00</td>
-                          <td class="py-2.5 px-5 font-mono">M50</td>
-                          <td class="py-2.5 px-5 font-mono">0.00% (Control)</td>
-                          <td class="py-2.5 px-5 text-xs sm:text-sm">Plain concrete mechanical benchmark</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold text-slate-900">M50-05</td>
-                          <td class="py-2.5 px-5 font-mono">M50</td>
-                          <td class="py-2.5 px-5 font-mono text-[#B45309] font-semibold">0.50%</td>
-                          <td class="py-2.5 px-5 text-xs sm:text-sm">Early micro-crack arrest &amp; shrinkage control</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold text-slate-900">M50-075</td>
-                          <td class="py-2.5 px-5 font-mono">M50</td>
-                          <td class="py-2.5 px-5 font-mono text-[#B45309] font-semibold">0.75%</td>
-                          <td class="py-2.5 px-5 text-xs sm:text-sm">Enhanced first-crack resistance &amp; balanced flow</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold text-slate-900">M50-100</td>
-                          <td class="py-2.5 px-5 font-mono">M50</td>
-                          <td class="py-2.5 px-5 font-mono text-[#B45309] font-semibold">1.00%</td>
-                          <td class="py-2.5 px-5 text-xs sm:text-sm">High post-cracking ductility &amp; energy absorption</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold text-slate-900">M50-125</td>
-                          <td class="py-2.5 px-5 font-mono">M50</td>
-                          <td class="py-2.5 px-5 font-mono text-[#B45309] font-semibold">1.25%</td>
-                          <td class="py-2.5 px-5 text-xs sm:text-sm">Upper dosage capacity &amp; dispersion threshold</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '01 / OVERVIEW · SLIDE 3 OF 3',
-            title: 'Project Objectives',
-            render: () => `
-              <div class="space-y-6">
-                <p class="text-sm sm:text-base text-slate-600 max-w-3xl">
-                  Four core research objectives guide the mix design, specimen testing, and mechanical evaluation of fibre-reinforced M50 concrete:
-                </p>
-
-                <!-- Clean 2x2 Numbered Grid of All 4 Exact Objectives -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-3">
-                      <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-[#0F3D6E] border border-blue-200/70">01</span>
-                      <span class="font-mono text-[11px] uppercase tracking-wider text-slate-400">Benchmarking</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">
-                      1. Evaluate Baseline vs. Fiber-Reinforced Performance:
-                    </h3>
-                    <p class="text-sm text-slate-600 mt-2.5 leading-relaxed">
-                      Establish the mechanical benchmark of plain M50 concrete (control specimen with 0% fiber) and quantify the relative gains in compressive and flexural capacity achieved through discrete fiber addition.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-3">
-                      <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-md bg-blue-50 text-[#0F3D6E] border border-blue-200/70">02</span>
-                      <span class="font-mono text-[11px] uppercase tracking-wider text-slate-400">Parametric Dosage</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">
-                      2. Determine the Influence of Fiber Volume Fraction (V<sub>f</sub>):
-                    </h3>
-                    <p class="text-sm text-slate-600 mt-2.5 leading-relaxed">
-                      Systematically assess the effects of varying fiber volume fractions (0.5%, 0.75%, 1.0%, and 1.25%) on workability, peak load-carrying capacity, and cracking behavior within a high-strength M50 matrix.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-3">
-                      <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-md bg-amber-50 text-[#B45309] border border-amber-200/70">03</span>
-                      <span class="font-mono text-[11px] uppercase tracking-wider text-slate-400">Toughness &amp; Ductility</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">
-                      3. Investigate Post-Cracking Ductility and Energy Dissipation:
-                    </h3>
-                    <p class="text-sm text-slate-600 mt-2.5 leading-relaxed">
-                      Measure the post-peak response, first-crack strength, and flexural toughness under bending loads to evaluate how crack-bridging mechanics alter failure from brittle rupture to pseudo-ductile behavior.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="flex items-center gap-3 mb-3">
-                      <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-md bg-amber-50 text-[#B45309] border border-amber-200/70">04</span>
-                      <span class="font-mono text-[11px] uppercase tracking-wider text-slate-400">Dosage Optimization</span>
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">
-                      4. Identify the Optimal Fiber Dosage:
-                    </h3>
-                    <p class="text-sm text-slate-600 mt-2.5 leading-relaxed">
-                      Establish the optimal fiber volume fraction that maximizes mechanical performance (compressive strength and modulus of rupture) while mitigating dispersion, balling, and compaction challenges in high-grade concrete.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      },
-      {
-        id: '02',
-        number: '02',
-        title: 'Background',
-        summary: 'Brittleness in plain concrete and evolution of discrete fibre reinforcement.',
-        slides: [
-          {
-            eyebrow: '02 / BACKGROUND · SLIDE 1 OF 2',
-            title: 'The Brittleness Challenge in Plain Concrete',
-            render: () => `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-6 space-y-4">
-                  <p class="text-base text-slate-700 leading-relaxed">
-                    While modern high-strength concrete mixes such as <strong>M50</strong> achieve impressive compressive capacity through a low water-to-cement ratio and dense hydration products, increasing matrix strength simultaneously increases <strong>brittleness</strong>.
-                  </p>
-                  <ul class="space-y-3 text-sm text-slate-600 leading-relaxed">
-                    <li class="flex items-start gap-2.5">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#0F3D6E] mt-2 shrink-0"></span>
-                      <span><strong>Low Tensile Strain Capacity:</strong> Concrete tensile strength is typically only 8% to 12% of its compressive strength, leading to early cracking under bending or restraint.</span>
-                    </li>
-                    <li class="flex items-start gap-2.5">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#0F3D6E] mt-2 shrink-0"></span>
-                      <span><strong>Shrinkage Micro-Cracking:</strong> Even prior to service loading, thermal and drying shrinkage generate micro-flaws along the interfacial transition zone (ITZ).</span>
-                    </li>
-                    <li class="flex items-start gap-2.5">
-                      <span class="w-1.5 h-1.5 rounded-full bg-[#B45309] mt-2 shrink-0"></span>
-                      <span><strong>Sudden Failure Without Warning:</strong> In unreinforced matrices, a single critical crack propagates unstablely, causing immediate loss of load capacity.</span>
-                    </li>
-                  </ul>
-                </div>
-
-                <div class="lg:col-span-6 arch-card rounded-2xl p-6">
-                  <div class="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-3">
-                    Interfacial Transition Zone (ITZ) Micro-Crack Evolution
-                  </div>
-                  <svg viewBox="0 0 420 220" class="w-full h-auto block">
-                    <rect x="16" y="16" width="388" height="188" rx="8" fill="#F1F5F9" stroke="#CBD5E1" stroke-width="1.2" />
-                    <!-- Aggregate Grains -->
-                    <circle cx="115" cy="95" r="34" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.2" />
-                    <circle cx="245" cy="125" r="40" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.2" />
-                    <circle cx="335" cy="75" r="28" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.2" />
-                    <!-- ITZ Rings -->
-                    <circle cx="115" cy="95" r="39" fill="none" stroke="#B45309" stroke-width="1.2" stroke-dasharray="3,3" />
-                    <circle cx="245" cy="125" r="45" fill="none" stroke="#B45309" stroke-width="1.2" stroke-dasharray="3,3" />
-                    <!-- Propagating Crack Path Around Aggregates -->
-                    <polyline points="55,188 86,138 148,118 196,136 286,105 352,42" fill="none" stroke="#DC2626" stroke-width="2.4" />
-                    <text x="210" y="26" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#475569">
-                      Unrestrained Crack Propagation Around Coarse Aggregates
-                    </text>
-                  </svg>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '02 / BACKGROUND · SLIDE 2 OF 2',
-            title: 'Role of Discrete Fibre Reinforcement',
-            render: () => `
-              <div class="space-y-6">
-                <p class="text-base text-slate-700 leading-relaxed max-w-3xl">
-                  Unlike conventional continuous steel rebar placed only in primary tension zones, short discrete fibres are distributed uniformly throughout the entire three-dimensional volume of the concrete mix.
-                </p>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#0F3D6E] font-mono font-bold text-sm flex items-center justify-center mb-4">
-                      3D
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900">Multi-Directional Reinforcement</h3>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Randomly oriented fibres intercept micro-cracks regardless of loading angle or local stress orientation, providing isotropic crack control.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="w-10 h-10 rounded-xl bg-amber-50 text-[#B45309] font-mono font-bold text-sm flex items-center justify-center mb-4">
-                      ITZ
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900">Delayed Macro-Crack Coalescence</h3>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Fibres stitch microscopic shrinkage flaws before they link together into structural macro-cracks, raising the effective first-crack load.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="w-10 h-10 rounded-xl bg-blue-50 text-[#1D5BA6] font-mono font-bold text-sm flex items-center justify-center mb-4">
-                      J/m²
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900">Enhanced Impact &amp; Fatigue Resistance</h3>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Progressive fibre debonding and frictional pull-out dissipate substantial kinetic and cyclic energy under dynamic or repeated service loads.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      },
-      {
-        id: '03',
-        number: '03',
-        title: 'Fibre-Reinforced Concrete',
-        summary: 'Crack-bridging mechanics, interfacial bond, and fibre dispersion control.',
-        slides: [
-          {
-            eyebrow: '03 / FIBRE-REINFORCED CONCRETE · SLIDE 1 OF 2',
-            title: 'Crack-Bridging & Pull-Out Mechanics',
-            render: () => `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-6">
-                  <div class="arch-card rounded-2xl p-5 sm:p-6">
-                    <div class="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-3">
-                      Micro-Mechanical Stress Transfer Across Crack Face
-                    </div>
-                    <svg viewBox="0 0 420 240" class="w-full h-auto block">
-                      <!-- Left & Right Concrete Matrix Blocks -->
-                      <rect x="20" y="28" width="176" height="184" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2" />
-                      <rect x="224" y="28" width="176" height="184" rx="4" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2" />
-                      <!-- Crack Gap -->
-                      <rect x="196" y="28" width="28" height="184" fill="#FFFBEB" />
-                      <line x1="196" y1="28" x2="196" y2="212" stroke="#B45309" stroke-width="1.4" stroke-dasharray="4,3" />
-                      <line x1="224" y1="28" x2="224" y2="212" stroke="#B45309" stroke-width="1.4" stroke-dasharray="4,3" />
-
-                      <!-- Bridging Fibres with Hooked Anchorage -->
-                      <g stroke="#0F3D6E" stroke-width="3" stroke-linecap="round" fill="none">
-                        <polyline points="92,62 102,70 318,70 328,78" />
-                        <polyline points="108,118 118,112 302,126 312,120" />
-                        <polyline points="86,168 96,174 324,164 334,170" />
-                      </g>
-
-                      <!-- Tensile Stress Transfer Arrows -->
-                      <g stroke="#B45309" stroke-width="2" fill="none">
-                        <line x1="186" y1="70" x2="152" y2="70" />
-                        <polyline points="159,65 152,70 159,75" />
-                        <line x1="234" y1="70" x2="268" y2="70" />
-                        <polyline points="261,65 268,70 261,75" />
-                      </g>
-
-                      <text x="210" y="18" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="#B45309">
-                        Crack Opening (δ) · Fibre Pull-Out Resistance
-                      </text>
-                      <text x="108" y="228" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Matrix Anchorage Zone</text>
-                      <text x="312" y="228" text-anchor="middle" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Matrix Anchorage Zone</text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="lg:col-span-6 space-y-4">
-                  <p class="text-base text-slate-700 leading-relaxed">
-                    Once matrix tensile strain exceeds its cracking threshold, structural load is transferred directly onto fibres spanning the fracture plane through three sequential mechanisms:
-                  </p>
-                  <div class="space-y-3">
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-xs font-bold text-[#0F3D6E]">01 · Elastic Stress Transfer</div>
-                      <p class="text-sm text-slate-600 mt-1">Prior to debonding, chemical adhesion and mechanical interlock share tensile stresses between the M50 paste and embedded fibres.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-xs font-bold text-[#B45309]">02 · Progressive Interfacial Debonding</div>
-                      <p class="text-sm text-slate-600 mt-1">As crack width widens, controlled slip occurs along the fibre–matrix interface rather than brittle fibre snapping.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-xs font-bold text-[#1D5BA6]">03 · Frictional Pull-Out Energy Dissipation</div>
-                      <p class="text-sm text-slate-600 mt-1">Frictional sliding and mechanical anchorage straightening absorb large amounts of fracture energy, yielding pseudo-ductile behavior.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '03 / FIBRE-REINFORCED CONCRETE · SLIDE 2 OF 2',
-            title: 'Dispersion, Workability & Balling Threshold',
-            render: () => `
-              <div class="space-y-6">
-                <p class="text-base text-slate-700 leading-relaxed max-w-3xl">
-                  In a dense high-strength M50 matrix, increasing fibre volume fraction (V<sub>f</sub>) improves post-cracking toughness but progressively reduces fresh-state workability if dispersion limits are exceeded.
-                </p>
-
-                <!-- Visual Dosage Spectrum Bar (0.0% to 1.25% Vf) -->
-                <div class="arch-card rounded-2xl p-6 space-y-5">
-                  <div class="flex items-center justify-between">
-                    <span class="font-mono text-xs uppercase tracking-wider font-bold text-slate-700">
-                      Volume Fraction (V<sub>f</sub>) Workability &amp; Dispersion Spectrum
-                    </span>
-                    <span class="font-mono text-xs text-[#0F3D6E] font-semibold">M50 Host Matrix</span>
-                  </div>
-
-                  <!-- Clean 5-Step Spectrum Grid -->
-                  <div class="grid grid-cols-1 sm:grid-cols-5 gap-3">
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div class="font-mono text-sm font-bold text-slate-900">0.00% V<sub>f</sub></div>
-                      <div class="text-xs font-semibold text-slate-500 mt-1">Control Mix</div>
-                      <p class="text-xs text-slate-600 mt-2">Reference M50 flow; zero fibre interference.</p>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-blue-50/50 border border-blue-200/80">
-                      <div class="font-mono text-sm font-bold text-[#0F3D6E]">0.50% V<sub>f</sub></div>
-                      <div class="text-xs font-semibold text-[#1D5BA6] mt-1">High Dispersion</div>
-                      <p class="text-xs text-slate-600 mt-2">Uniform random orientation with minimal slump reduction.</p>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
-                      <div class="font-mono text-sm font-bold text-emerald-900">0.75% V<sub>f</sub></div>
-                      <div class="text-xs font-semibold text-emerald-700 mt-1">Optimal Zone</div>
-                      <p class="text-xs text-slate-600 mt-2">Dense crack-bridging mesh with smooth compaction.</p>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-emerald-50/60 border border-emerald-200">
-                      <div class="font-mono text-sm font-bold text-emerald-900">1.00% V<sub>f</sub></div>
-                      <div class="text-xs font-semibold text-emerald-700 mt-1">Optimal Zone</div>
-                      <p class="text-xs text-slate-600 mt-2">Peak mechanical synergy with controlled vibration.</p>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-amber-50/70 border border-amber-200">
-                      <div class="font-mono text-sm font-bold text-[#B45309]">1.25% V<sub>f</sub></div>
-                      <div class="text-xs font-semibold text-[#B45309] mt-1">Balling Threshold</div>
-                      <p class="text-xs text-slate-600 mt-2">Stiffer mix; requires careful dosing to avoid fibre balling.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      },
-      {
-        id: '04',
-        number: '04',
-        title: 'Compressive Strength Test',
-        summary: 'Cube specimen preparation, axial loading protocol, and failure mode analysis.',
-        slides: [
-          {
-            eyebrow: '04 / COMPRESSIVE STRENGTH TEST · SLIDE 1 OF 2',
-            title: 'Test Methodology & Specimen Setup',
-            render: () => `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-5">
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-2">
-                      IS 516 Axial Compression Schematic
-                    </div>
-                    <svg viewBox="0 0 320 250" class="w-full h-auto block">
-                      <!-- Top & Bottom Steel Bearing Platens -->
-                      <rect x="85" y="42" width="150" height="16" rx="2" fill="#475569" />
-                      <rect x="80" y="182" width="160" height="18" rx="2" fill="#475569" />
-
-                      <!-- Axial Load Arrows -->
-                      <g stroke="#0F3D6E" stroke-width="2.4" fill="none">
-                        <line x1="125" y1="12" x2="125" y2="38" />
-                        <polyline points="120,31 125,38 130,31" />
-                        <line x1="160" y1="12" x2="160" y2="38" />
-                        <polyline points="155,31 160,38 165,31" />
-                        <line x1="195" y1="12" x2="195" y2="38" />
-                        <polyline points="190,31 195,38 199,31" />
-                      </g>
-
-                      <!-- 150x150x150 mm M50 Cube -->
-                      <rect x="108" y="58" width="104" height="124" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5" />
-
-                      <!-- Lateral Fibre Confinement Indicators -->
-                      <g stroke="#B45309" stroke-width="2.2" stroke-linecap="round">
-                        <line x1="120" y1="92" x2="152" y2="95" />
-                        <line x1="168" y1="118" x2="200" y2="115" />
-                        <line x1="124" y1="150" x2="158" y2="148" />
-                      </g>
-
-                      <!-- Dimension Callout -->
-                      <text x="160" y="222" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="600" fill="#0F172A">
-                        150 × 150 × 150 mm M50 Cube
-                      </text>
-                      <text x="160" y="238" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" fill="#64748B">
-                        Uniform Uniaxial Loading (IS 516)
-                      </text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="lg:col-span-7 space-y-4">
-                  <p class="text-base text-slate-700 leading-relaxed">
-                    Compressive strength testing evaluates axial load-bearing capacity, elastic stiffness, and how discrete fibres redistribute lateral tensile stresses inside the M50 concrete matrix.
-                  </p>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-[11px] uppercase text-slate-500">Standard Specimen</div>
-                      <div class="text-sm font-bold text-slate-900 mt-1">150 × 150 × 150 mm Cubes</div>
-                      <p class="text-xs text-slate-600 mt-1">Cast across all 5 mixes (0.0% control + 4 fibre dosages).</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-[11px] uppercase text-slate-500">Curing &amp; Standard</div>
-                      <div class="text-sm font-bold text-slate-900 mt-1">IS 516 Water Curing</div>
-                      <p class="text-xs text-slate-600 mt-1">Tested under continuous monotonic axial compression.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-[11px] uppercase text-slate-500">Primary Formula</div>
-                      <div class="text-sm font-mono font-bold text-[#0F3D6E] mt-1">f<sub>ck</sub> = P<sub>max</sub> / A</div>
-                      <p class="text-xs text-slate-600 mt-1">Peak axial load divided by cross-sectional bearing area (22,500 mm²).</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-[11px] uppercase text-slate-500">Lateral Confinement</div>
-                      <div class="text-sm font-bold text-[#B45309] mt-1">Poisson Crack Restraint</div>
-                      <p class="text-xs text-slate-600 mt-1">Fibres arrest vertical splitting cracks induced by lateral expansion.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '04 / COMPRESSIVE STRENGTH TEST · SLIDE 2 OF 2',
-            title: 'Failure Mode & Matrix-Fibre Load Redistribution',
-            render: () => `
-              <div class="space-y-6">
-                <!-- Side-by-Side Comparison Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div class="arch-card rounded-2xl p-5 border-l-4 border-l-slate-400">
-                    <div class="font-mono text-xs uppercase tracking-wider text-slate-500 font-semibold">
-                      Plain M50 Control (0.0% V<sub>f</sub>)
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mt-1">Explosive Conical / Hourglass Spalling</h3>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      At ultimate axial load, lateral tensile strains cause rapid vertical splitting and sudden spalling of outer concrete faces, leaving an hourglass core with zero residual integrity.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-5 border-l-4 border-l-[#B45309]">
-                    <div class="font-mono text-xs uppercase tracking-wider text-[#B45309] font-semibold">
-                      Fibre-Reinforced M50 (0.50% – 1.25% V<sub>f</sub>)
-                    </div>
-                    <h3 class="text-lg font-bold text-slate-900 mt-1">Ductile Lateral Confinement &amp; Integrity</h3>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Embedded fibres bridge lateral splitting cracks and hold the crushed matrix together well past peak load, preventing explosive fragmentation and preserving structural stability.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Clean Results Summary Table Template -->
-                <div class="arch-card rounded-2xl overflow-hidden">
-                  <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
-                    <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700">
-                      Compressive Strength Observation Log (M50 Matrix)
-                    </span>
-                    <span class="font-mono text-xs text-slate-500">IS 516 Cube Data</span>
-                  </div>
-                  <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse text-sm">
-                      <thead>
-                        <tr class="border-b border-slate-200 text-xs font-mono uppercase text-slate-500 bg-white">
-                          <th class="py-2.5 px-5">Fibre Dosage (V<sub>f</sub>)</th>
-                          <th class="py-2.5 px-5">Observed Failure Mode</th>
-                          <th class="py-2.5 px-5">28-Day Strength (MPa)</th>
-                          <th class="py-2.5 px-5">Relative Trend</th>
-                        </tr>
-                      </thead>
-                      <tbody class="divide-y divide-slate-100 text-slate-700 text-xs sm:text-sm">
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold">0.00% (Control)</td>
-                          <td class="py-2.5 px-5">Brittle conical spalling</td>
-                          <td class="py-2.5 px-5 font-mono text-slate-500">Baseline (f<sub>ck,0</sub>)</td>
-                          <td class="py-2.5 px-5 font-mono">Reference (1.00×)</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold">0.50%</td>
-                          <td class="py-2.5 px-5">Fine vertical micro-cracks; intact core</td>
-                          <td class="py-2.5 px-5 font-mono text-slate-500">Recorded (MPa)</td>
-                          <td class="py-2.5 px-5 font-mono text-[#0F3D6E]">Moderate axial gain</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold">0.75%</td>
-                          <td class="py-2.5 px-5">Controlled multi-crack confinement</td>
-                          <td class="py-2.5 px-5 font-mono text-slate-500">Recorded (MPa)</td>
-                          <td class="py-2.5 px-5 font-mono text-[#0F3D6E]">Enhanced stiffness &amp; peak</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold">1.00%</td>
-                          <td class="py-2.5 px-5">Ductile bulging without spalling</td>
-                          <td class="py-2.5 px-5 font-mono text-slate-500">Recorded (MPa)</td>
-                          <td class="py-2.5 px-5 font-mono text-[#B45309] font-semibold">Peak compressive synergy</td>
-                        </tr>
-                        <tr>
-                          <td class="py-2.5 px-5 font-mono font-semibold">1.25%</td>
-                          <td class="py-2.5 px-5">Ductile failure; compaction-sensitive</td>
-                          <td class="py-2.5 px-5 font-mono text-slate-500">Recorded (MPa)</td>
-                          <td class="py-2.5 px-5 font-mono text-slate-600">Plateau / dispersion limit</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      },
-      {
-        id: '05',
-        number: '05',
-        title: 'Flexural Strength Test',
-        summary: 'Prism bending setup, modulus of rupture, and post-cracking ductility.',
-        slides: [
-          {
-            eyebrow: '05 / FLEXURAL STRENGTH TEST · SLIDE 1 OF 2',
-            title: 'Bending Setup & Modulus of Rupture',
-            render: () => `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-6">
-                  <div class="arch-card rounded-2xl p-5 sm:p-6">
-                    <div class="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold mb-3">
-                      Third-Point Bending Setup (100 × 100 × 500 mm Prism)
-                    </div>
-                    <svg viewBox="0 0 420 220" class="w-full h-auto block">
-                      <!-- Two-Point Load Arrows (P/2, P/2) -->
-                      <g stroke="#0F3D6E" stroke-width="2.4" fill="none">
-                        <line x1="160" y1="18" x2="160" y2="54" />
-                        <polyline points="155,47 160,54 165,47" />
-                        <line x1="260" y1="18" x2="260" y2="54" />
-                        <polyline points="255,47 260,54 265,47" />
-                      </g>
-                      <text x="160" y="13" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#0F3D6E">P/2</text>
-                      <text x="260" y="13" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10.5" font-weight="700" fill="#0F3D6E">P/2</text>
-
-                      <!-- Concrete Prism Beam -->
-                      <rect x="52" y="58" width="316" height="68" rx="3" fill="#E2E8F0" stroke="#64748B" stroke-width="1.5" />
-
-                      <!-- Neutral Axis -->
-                      <line x1="52" y1="92" x2="368" y2="92" stroke="#94A3B8" stroke-width="1" stroke-dasharray="4,3" />
-
-                      <!-- Pure Bending Tension Crack + Bridging Fibres -->
-                      <polyline points="210,126 207,108 212,96" fill="none" stroke="#DC2626" stroke-width="2" />
-                      <g stroke="#B45309" stroke-width="2.6" stroke-linecap="round">
-                        <line x1="190" y1="118" x2="230" y2="117" />
-                        <line x1="193" y1="106" x2="227" y2="107" />
-                      </g>
-
-                      <!-- Roller Supports (Span L = 400 mm) -->
-                      <polygon points="82,126 72,144 92,144" fill="none" stroke="#475569" stroke-width="1.8" />
-                      <polygon points="338,126 328,144 348,144" fill="none" stroke="#475569" stroke-width="1.8" />
-                      <line x1="48" y1="146" x2="372" y2="146" stroke="#475569" stroke-width="1.5" />
-
-                      <!-- Span Dimension -->
-                      <line x1="82" y1="168" x2="338" y2="168" stroke="#64748B" stroke-width="1.2" />
-                      <line x1="82" y1="162" x2="82" y2="174" stroke="#64748B" stroke-width="1.2" />
-                      <line x1="338" y1="162" x2="338" y2="174" stroke="#64748B" stroke-width="1.2" />
-                      <text x="210" y="185" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#475569">
-                        Effective Span L = 400 mm (L/3 = 133.3 mm)
-                      </text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="lg:col-span-6 space-y-4">
-                  <p class="text-base text-slate-700 leading-relaxed">
-                    Flexural testing directly captures the primary structural advantage of discrete fibre reinforcement: sustained tensile stress transfer across the bottom tension zone under bending.
-                  </p>
-                  <div class="space-y-3">
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-xs font-bold text-[#0F3D6E]">Modulus of Rupture (f<sub>cr</sub> = PL / bd²)</div>
-                      <p class="text-sm text-slate-600 mt-1">Quantifies peak flexural tensile stress sustained by the 100 × 100 × 500 mm prism across a 400 mm span.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-xs font-bold text-[#B45309]">First-Crack Strength vs. Ultimate Load</div>
-                      <p class="text-sm text-slate-600 mt-1">Distinguishes the load at which the M50 matrix first cracks from the post-cracking load sustained by bridging fibres.</p>
-                    </div>
-                    <div class="p-4 rounded-xl bg-white border border-slate-200">
-                      <div class="font-mono text-xs font-bold text-[#1D5BA6]">Post-Peak Flexural Toughness</div>
-                      <p class="text-sm text-slate-600 mt-1">Measured from the area under the load–deflection curve, representing total fracture energy absorbed before failure.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '05 / FLEXURAL STRENGTH TEST · SLIDE 2 OF 2',
-            title: 'Load–Deflection & Post-Cracking Response',
-            render: () => `
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                <div class="lg:col-span-7">
-                  <div class="arch-card rounded-2xl p-5 sm:p-6">
-                    <div class="flex items-center justify-between mb-3">
-                      <span class="font-mono text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
-                        Illustrative Flexural Load (P) vs. Mid-Span Deflection (δ)
-                      </span>
-                      <span class="font-mono text-[11px] text-[#B45309] font-semibold">Shaded Area = Toughness</span>
-                    </div>
-
-                    <svg viewBox="0 0 480 260" class="w-full h-auto block">
-                      <!-- Grid Lines -->
-                      <g stroke="#E2E8F0" stroke-width="1">
-                        <line x1="54" y1="35" x2="452" y2="35" />
-                        <line x1="54" y1="82" x2="452" y2="82" />
-                        <line x1="54" y1="129" x2="452" y2="129" />
-                        <line x1="54" y1="176" x2="452" y2="176" />
-                      </g>
-
-                      <!-- Axes -->
-                      <line x1="54" y1="24" x2="54" y2="222" stroke="#64748B" stroke-width="1.5" />
-                      <line x1="54" y1="222" x2="456" y2="222" stroke="#64748B" stroke-width="1.5" />
-
-                      <!-- Shaded Area Under FRC Curve (Energy Absorption / Toughness) -->
-                      <polygon points="54,222 118,52 152,66 235,88 335,118 430,148 430,222"
-                               fill="rgba(180, 83, 9, 0.11)" />
-
-                      <!-- FRC Post-Cracking Ductile Curve -->
-                      <polyline points="54,222 118,52 132,68 164,62 245,90 340,120 430,148"
-                                fill="none" stroke="#0F3D6E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
-
-                      <!-- Plain M50 Brittle Curve -->
-                      <polyline points="54,222 110,74 118,222"
-                                fill="none" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="5,4" />
-
-                      <!-- Annotations -->
-                      <circle cx="118" cy="52" r="4.5" fill="#0F3D6E" />
-                      <text x="128" y="47" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" fill="#0F3D6E">
-                        First-Crack &amp; Fibre Engagement
-                      </text>
-
-                      <text x="275" y="168" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" font-weight="600" fill="#B45309">
-                        Post-Crack Energy Absorption
-                      </text>
-
-                      <!-- Legend -->
-                      <line x1="255" y1="26" x2="280" y2="26" stroke="#0F3D6E" stroke-width="3" />
-                      <text x="286" y="30" font-family="Inter, sans-serif" font-size="10.5" font-weight="600" fill="#0F172A">FRC Mixes (0.50% – 1.25%)</text>
-
-                      <line x1="255" y1="43" x2="280" y2="43" stroke="#DC2626" stroke-width="2.2" stroke-dasharray="4,3" />
-                      <text x="286" y="47" font-family="Inter, sans-serif" font-size="10.5" fill="#475569">Plain M50 Control (Brittle Drop)</text>
-
-                      <!-- Axis Labels -->
-                      <text x="255" y="248" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#475569">
-                        Mid-Span Deflection δ (mm) →
-                      </text>
-                      <text x="18" y="125" text-anchor="middle" transform="rotate(-90 18 125)" font-family="JetBrains Mono, monospace" font-size="10" fill="#475569">
-                        Applied Flexural Load P (kN) →
-                      </text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="lg:col-span-5 space-y-4">
-                  <div class="p-4 rounded-xl bg-white border border-slate-200">
-                    <div class="font-mono text-xs font-bold text-red-700">Plain M50 Control Response</div>
-                    <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      Exhibits a steep linear-elastic rise followed by an immediate vertical load drop at first crack—demonstrating brittle fracture with negligible post-peak toughness.
-                    </p>
-                  </div>
-
-                  <div class="p-4 rounded-xl bg-amber-50/50 border border-amber-200">
-                    <div class="font-mono text-xs font-bold text-[#B45309]">Fibre-Reinforced Response</div>
-                    <p class="text-sm text-slate-700 mt-1.5 leading-relaxed">
-                      Maintains a sustained load-carrying plateau across large mid-span deflections. The substantial area beneath the curve confirms pseudo-ductile energy dissipation.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      },
-      {
-        id: '06',
-        number: '06',
-        title: 'Conclusion',
-        summary: 'Optimal fibre dosage synthesis, key findings, and structural applications.',
-        slides: [
-          {
-            eyebrow: '06 / CONCLUSION · SLIDE 1 OF 2',
-            title: 'Key Takeaways & Optimal Dosage Synthesis',
-            render: () => `
-              <div class="space-y-6">
-                <div class="arch-card rounded-2xl p-6 border-l-4 border-l-[#0F3D6E]">
-                  <div class="font-mono text-xs uppercase tracking-wider text-[#0F3D6E] font-semibold">
-                    Primary Research Synthesis
-                  </div>
-                  <p class="text-base sm:text-lg font-medium text-slate-800 mt-2 leading-relaxed">
-                    Incorporating discrete, randomly oriented fibres into high-strength M50 concrete transforms its tensile and flexural failure mode from sudden brittle rupture into a controlled, pseudo-ductile, energy-absorbing process.
-                  </p>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-xs font-bold text-[#0F3D6E]">01 · Compressive Behavior</div>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Fibre addition yields moderate gains in peak compressive strength while dramatically improving post-peak specimen integrity by restraining explosive lateral spalling.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-xs font-bold text-[#B45309]">02 · Flexural &amp; Toughness Gains</div>
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      Substantial improvements are achieved in modulus of rupture, first-crack load, and post-cracking flexural toughness due to three-dimensional crack bridging.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-5 bg-emerald-50/35 border-emerald-200">
-                    <div class="font-mono text-xs font-bold text-emerald-800">03 · Balanced Optimal Dosage</div>
-                    <p class="text-sm text-slate-700 mt-2 leading-relaxed">
-                      The <strong>0.75% – 1.00% V<sub>f</sub></strong> range provides the optimal balance between maximum mechanical enhancement and fresh-state dispersion without fibre balling.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            `
-          },
-          {
-            eyebrow: '06 / CONCLUSION · SLIDE 2 OF 2',
-            title: 'Infrastructure Applications & Future Scope',
-            render: () => `
-              <div class="space-y-6">
-                <p class="text-base text-slate-700 leading-relaxed max-w-3xl">
-                  High-strength M50 Fibre-Reinforced Concrete is well-suited for structural elements subjected to flexural tension, shrinkage restraint, impact, and cyclic fatigue:
-                </p>
-
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-xs text-[#0F3D6E] font-bold">APPLICATION 01</div>
-                    <h3 class="text-base font-bold text-slate-900 mt-1">Industrial &amp; Heavy-Duty Pavements</h3>
-                    <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      Controls shrinkage cracking and increases joint spacing in warehouse slabs-on-grade and airport taxiways subjected to heavy wheel loads.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-xs text-[#0F3D6E] font-bold">APPLICATION 02</div>
-                    <h3 class="text-base font-bold text-slate-900 mt-1">Bridge Decks &amp; Structural Overlays</h3>
-                    <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      Enhances flexural fatigue endurance and restricts crack widths, protecting underlying reinforcement against moisture and chloride ingress.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-xs text-[#B45309] font-bold">APPLICATION 03</div>
-                    <h3 class="text-base font-bold text-slate-900 mt-1">Precast Tunnel Linings</h3>
-                    <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      Prevents corner chipping during demolding and handling while providing ductile resistance against ground pressure and bending stresses.
-                    </p>
-                  </div>
-
-                  <div class="arch-card rounded-2xl p-5">
-                    <div class="font-mono text-xs text-[#B45309] font-bold">APPLICATION 04</div>
-                    <h3 class="text-base font-bold text-slate-900 mt-1">Seismic Beam–Column Joints</h3>
-                    <p class="text-sm text-slate-600 mt-1.5 leading-relaxed">
-                      Improves shear confinement, energy dissipation capacity, and damage tolerance in congested seismic-resistant concrete frames.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      },
-      {
-        id: '07',
-        number: '07',
-        title: 'Acknowledgement',
-        summary: 'Academic guidance, laboratory support, and project team attribution.',
-        slides: [
-          {
-            eyebrow: '07 / ACKNOWLEDGEMENT · SLIDE 1 OF 1',
-            title: 'Acknowledgement',
-            render: () => `
-              <div class="max-w-3xl mx-auto">
-                <div class="arch-card rounded-2xl p-7 sm:p-10 space-y-6">
-                  <div class="font-mono text-xs uppercase tracking-widest text-[#B45309] font-semibold">
-                    Department of Civil Engineering · B.Tech Project
-                  </div>
-
-                  <p class="text-base sm:text-[17px] text-slate-700 leading-[1.8]">
-                    We express our sincere and profound gratitude to our project guide, <strong class="text-slate-900">Dr. Rahul Bharatiya</strong>, for his invaluable mentorship, insightful guidance on high-strength concrete mechanics, and constant encouragement throughout every stage of this Bachelor of Technology project.
-                  </p>
-
-                  <p class="text-base sm:text-[17px] text-slate-700 leading-[1.8]">
-                    We extend our heartfelt thanks to <strong class="text-slate-900">Nikhil Ghatak (23DR0094)</strong> for his dedicated research assistance and technical support, as well as the <strong class="text-slate-900">Concrete Technology Laboratory</strong> staff for facilitating specimen casting, curing, and mechanical testing.
-                  </p>
-
-                  <!-- Formal Project Team Attribution Block -->
-                  <div class="pt-6 border-t border-slate-200 grid grid-cols-1 sm:grid-cols-3 gap-4">
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div class="font-mono text-[10px] uppercase tracking-wider text-slate-500">Guided By</div>
-                      <div class="text-sm font-bold text-slate-900 mt-1">Dr. Rahul Bharatiya</div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div class="font-mono text-[10px] uppercase tracking-wider text-slate-500">Project By</div>
-                      <div class="text-xs font-bold text-slate-900 mt-1">
-                        Atluri Karthikeyan Reddy <span class="font-mono font-normal text-slate-600">(23JE0138)</span>
-                      </div>
-                      <div class="text-xs font-bold text-slate-900 mt-0.5">
-                        Saurav Kumar <span class="font-mono font-normal text-slate-600">(23JE0891)</span>
-                      </div>
-                    </div>
-
-                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200">
-                      <div class="font-mono text-[10px] uppercase tracking-wider text-slate-500">Assisted By</div>
-                      <div class="text-sm font-bold text-slate-900 mt-1">
-                        Nikhil Ghatak <span class="font-mono text-xs font-normal text-slate-600">(23DR0094)</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            `
-          }
-        ]
-      }
-    ];
-
-    /**
-     * APPLICATION STATE
-     */
-    const appState = {
-      view: 'home',          // 'home' | 'presentation'
-      chapterIndex: 0,       // 0..6
-      slideIndex: 0,         // 0..(slides.length - 1)
-      activeCodeTab: 'html'  // 'html' | 'css'
-    };
-
-    /**
-     * NAVIGATION ACTIONS
-     */
-    function goHome(targetAnchor = null) {
-      appState.view = 'home';
-      renderApp();
-      if (targetAnchor) {
-        setTimeout(() => {
-          const el = document.getElementById(targetAnchor);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 40);
-      } else {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }
-    }
-
-    function openChapter(chapterId, slideIdx = 0) {
-      const foundIdx = CHAPTERS.findIndex((c) => c.id === chapterId);
-      appState.chapterIndex = foundIdx >= 0 ? foundIdx : 0;
-      appState.slideIndex = slideIdx;
-      appState.view = 'presentation';
-      renderApp();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function prevSlide() {
-      if (appState.view !== 'presentation') return;
-      if (appState.slideIndex > 0) {
-        appState.slideIndex -= 1;
-        renderApp();
-      } else if (appState.chapterIndex > 0) {
-        appState.chapterIndex -= 1;
-        appState.slideIndex = CHAPTERS[appState.chapterIndex].slides.length - 1;
-        renderApp();
-      }
-    }
-
-    function nextSlide() {
-      if (appState.view !== 'presentation') return;
-      const currentChap = CHAPTERS[appState.chapterIndex];
-      if (appState.slideIndex < currentChap.slides.length - 1) {
-        appState.slideIndex += 1;
-        renderApp();
-      } else if (appState.chapterIndex < CHAPTERS.length - 1) {
-        // 'Next Topic →' advances smoothly to Slide 1 of the next chapter
-        appState.chapterIndex += 1;
-        appState.slideIndex = 0;
-        renderApp();
-      } else {
-        // Final slide of Chapter 07 returns cleanly to Home
-        goHome();
-      }
-    }
-
-    // Keyboard Left / Right Arrow Support in Presentation Mode
-    document.addEventListener('keydown', (e) => {
-      const modal = document.getElementById('code-export-modal');
-      if (!modal.classList.contains('hidden')) {
-        if (e.key === 'Escape') closeCodeModal();
-        return;
-      }
-      if (appState.view !== 'presentation') return;
-      if (e.target.tagName === 'SELECT' || e.target.tagName === 'INPUT') return;
-      if (e.key === 'ArrowRight') nextSlide();
-      if (e.key === 'ArrowLeft') prevSlide();
-    });
-
-    // Touch Swipe Support for Mobile Presentation Navigation
-    let touchStartX = 0;
-    document.addEventListener('touchstart', (e) => {
-      touchStartX = e.changedTouches[0].screenX;
-    }, { passive: true });
-
-    document.addEventListener('touchend', (e) => {
-      if (appState.view !== 'presentation') return;
-      const dx = e.changedTouches[0].screenX - touchStartX;
-      if (Math.abs(dx) > 65) {
-        if (dx < 0) nextSlide();
-        if (dx > 0) prevSlide();
-      }
-    }, { passive: true });
-
-    /**
-     * RENDER HEADER (HOME VS. PRESENTATION MODE)
-     */
-    function renderHeader() {
-      const headerInner = document.getElementById('header-inner');
-      const progressTrack = document.getElementById('header-progress-track');
-      const progressFill = document.getElementById('header-progress-fill');
-
-      if (appState.view === 'home') {
-        progressTrack.classList.add('hidden');
-        headerInner.innerHTML = `
-          <!-- Left: Minimalist Geometric Concrete-Beam SVG Emblem + Title -->
-          <button type="button" onclick="goHome()" class="flex items-center gap-3 text-left group cursor-pointer focus:outline-none">
-            <div class="w-9 h-9 rounded-lg bg-[#0F3D6E] flex items-center justify-center text-white shrink-0 shadow-xs">
-              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-                <rect x="3" y="6" width="18" height="12" rx="1.5" />
-                <line x1="6" y1="10" x2="10" y2="11" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" />
-                <line x1="14" y1="14" x2="18" y2="13" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" />
-                <line x1="10" y1="15" x2="13" y2="14" stroke="#FBBF24" stroke-width="1.8" stroke-linecap="round" />
-              </svg>
-            </div>
-            <div>
-              <div class="text-xs sm:text-sm font-bold text-slate-900 tracking-tight group-hover:text-[#0F3D6E] transition-colors">
-                B.Tech Project • Civil Engineering
-              </div>
-              <div class="hidden sm:block font-mono text-[11px] text-slate-500">
-                Structural Concrete Monograph
-              </div>
-            </div>
-          </button>
-
-          <!-- Center: Clean Horizontal Links on Desktop -->
-          <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600">
-            <button type="button" onclick="goHome()" class="text-[#0F3D6E] font-semibold cursor-pointer">Home</button>
-            <button type="button" onclick="goHome('chapters-section')" class="hover:text-slate-900 transition cursor-pointer">Chapters</button>
-            <button type="button" onclick="goHome('credits-section')" class="hover:text-slate-900 transition cursor-pointer">Credits</button>
-          </nav>
-
-          <!-- Right: Get Website Code + Start Presentation -->
-          <div class="flex items-center gap-2.5">
-            <button type="button" onclick="openCodeModal()"
-                    class="px-3.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-xs font-medium text-slate-700 transition cursor-pointer">
-              Get Website Code
-            </button>
-            <button type="button" onclick="openChapter('01', 0)"
-                    class="px-4 py-2 rounded-lg bg-[#0F3D6E] hover:bg-[#1D5BA6] text-white text-xs font-semibold transition cursor-pointer shadow-xs">
-              Start Presentation →
-            </button>
-          </div>
-        `;
-      } else {
-        const chap = CHAPTERS[appState.chapterIndex];
-        const totalSlides = chap.slides.length;
-        const pct = (((appState.slideIndex + 1) / totalSlides) * 100).toFixed(2);
-
-        progressTrack.classList.remove('hidden');
-        progressFill.style.width = `${pct}%`;
-
-        headerInner.innerHTML = `
-          <!-- Left: ← Home -->
-          <button type="button" onclick="goHome()"
-                  class="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold text-[#0F3D6E] hover:text-[#1D5BA6] px-2.5 py-1.5 rounded-lg hover:bg-slate-100 transition cursor-pointer">
-            <span>← Home</span>
-          </button>
-
-          <!-- Center: Subtle Chapter Switcher Dropdown -->
-          <div class="flex items-center">
-            <label for="chapter-switcher" class="sr-only">Switch Project Chapter</label>
-            <select id="chapter-switcher" onchange="openChapter(this.value, 0)"
-                    class="rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 px-3 py-1.5 text-xs sm:text-sm font-medium text-slate-800 focus:outline-none focus:border-[#1D5BA6] cursor-pointer max-w-[200px] sm:max-w-xs">
-              ${CHAPTERS.map((c) => `
-                <option value="${c.id}" ${c.id === chap.id ? 'selected' : ''}>
-                  ${c.number} · ${c.title}
-                </option>
-              `).join('')}
-            </select>
-          </div>
-
-          <!-- Right: Current Chapter Title -->
-          <div class="hidden sm:block text-right">
-            <span class="font-mono text-xs text-slate-400 mr-1.5">${chap.number}</span>
-            <span class="text-sm font-bold text-slate-900">${chap.title}</span>
-          </div>
-        `;
-      }
-    }
-
-    /**
-     * RENDER HOME VIEW (Hero + 3 Summary Cards + 7 Chapter Cards + 3-Column Credits Footer)
-     */
-    function renderHomeView(viewport) {
-      document.getElementById('presentation-footer').classList.add('hidden');
-
-      viewport.innerHTML = `
-        <div class="view-fade-enter">
-          
-          <!-- ================================================================
-               HERO SECTION (2-Column Asymmetric Layout with Architectural Grid)
-               ================================================================ -->
-          <section class="hero-architectural-grid border-b border-slate-200">
-            <div class="max-w-6xl mx-auto px-4 sm:px-8 py-14 sm:py-20 lg:py-24">
-              <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-                
-                <!-- Left Column (7 Cols) -->
-                <div class="lg:col-span-7 space-y-6">
-                  <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-slate-200 shadow-2xs">
-                    <span class="w-2 h-2 rounded-full bg-[#B45309]"></span>
-                    <span class="font-mono text-[11px] font-semibold tracking-widest uppercase text-slate-700">
-                      BACHELOR OF TECHNOLOGY PROJECT
-                    </span>
-                  </div>
-
-                  <div>
-                    <h1 class="text-4xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-slate-900 leading-[1.08]">
-                      Fibre-Reinforced Concrete
-                    </h1>
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-[#0F3D6E] mt-2 leading-snug">
-                      &amp; its Mechanical Properties
-                    </h2>
-                  </div>
-
-                  <p class="text-base sm:text-[17px] text-slate-600 leading-[1.75] max-w-2xl">
-                    An experimental investigation into how discrete, randomly oriented fibres enhance the ductility, crack resistance, and post-cracking energy absorption of high-strength M50 concrete under compressive and flexural loading.
-                  </p>
-
-                  <!-- Primary & Secondary CTAs -->
-                  <div class="pt-2 flex flex-wrap items-center gap-3.5">
-                    <button type="button" onclick="openChapter('01', 0)"
-                            class="px-6 py-3.5 rounded-xl bg-[#0F3D6E] hover:bg-[#1D5BA6] text-white text-sm font-semibold transition cursor-pointer shadow-sm">
-                      Begin Presentation (01 Overview) →
-                    </button>
-
-                    <button type="button" onclick="goHome('chapters-section')"
-                            class="px-5 py-3.5 rounded-xl bg-white hover:bg-slate-50 border border-slate-300 text-slate-700 text-sm font-semibold transition cursor-pointer">
-                      Explore Chapters ↓
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Right Column (5 Cols): Serene Architectural SVG Illustration Card -->
-                <div class="lg:col-span-5">
-                  <div class="arch-card rounded-2xl p-6">
-                    <div class="flex items-center justify-between pb-3.5 border-b border-slate-100">
-                      <span class="font-mono text-xs font-semibold uppercase tracking-wider text-slate-700">
-                        Specimen &amp; Study Profile
-                      </span>
-                      <span class="font-mono text-[11px] px-2 py-0.5 rounded bg-slate-100 text-slate-600">
-                        IS 516 · M50
-                      </span>
-                    </div>
-
-                    <!-- Isometric M50 Concrete Prism with Embedded Brass/Steel Fibres -->
-                    <div class="my-4 rounded-xl bg-slate-50/80 border border-slate-100 p-4">
-                      <svg viewBox="0 0 360 190" class="w-full h-auto block" role="img" aria-label="Isometric M50 concrete prism with discrete fibres bridging a hairline micro-crack">
-                        <!-- Isometric Prism Top Face -->
-                        <polygon points="85,56 225,26 305,62 165,92" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2" />
-                        <!-- Isometric Prism Left Front Face -->
-                        <polygon points="85,56 165,92 165,156 85,120" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.2" />
-                        <!-- Isometric Prism Right Long Face -->
-                        <polygon points="165,92 305,62 305,126 165,156" fill="#F1F5F9" stroke="#94A3B8" stroke-width="1.2" />
-
-                        <!-- Hairline Flexural Micro-Crack on Right Face -->
-                        <polyline points="236,141 234,122 238,106 235,96" fill="none" stroke="#B45309" stroke-width="1.8" />
-
-                        <!-- Discrete Embedded Brass/Steel Fibres -->
-                        <g stroke="#B45309" stroke-width="2.2" stroke-linecap="round" fill="none">
-                          <!-- Bridging across the micro-crack -->
-                          <polyline points="218,114 222,112 252,107 256,109" />
-                          <polyline points="220,132 224,134 250,127 254,129" />
-                          <!-- Distributed inside matrix -->
-                          <line x1="184" y1="112" x2="204" y2="104" />
-                          <line x1="268" y1="92" x2="288" y2="96" />
-                          <line x1="112" y1="96" x2="136" y2="104" />
-                          <line x1="176" y1="62" x2="202" y2="58" />
-                        </g>
-
-                        <!-- Subtle Dimension & Callout Labels -->
-                        <text x="236" y="172" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9.5" fill="#475569">
-                          Discrete Fibres Bridging Hairline Crack
-                        </text>
-                      </svg>
-                    </div>
-
-                    <!-- 3 Crisp Specification Rows -->
-                    <dl class="divide-y divide-slate-100 text-xs sm:text-sm">
-                      <div class="py-2.5 flex items-center justify-between gap-3">
-                        <dt class="text-slate-500">Matrix Grade</dt>
-                        <dd class="font-semibold text-slate-900 text-right">M50 High-Strength Concrete</dd>
-                      </div>
-                      <div class="py-2.5 flex items-center justify-between gap-3">
-                        <dt class="text-slate-500">Fibre Volume Fractions (V<sub>f</sub>)</dt>
-                        <dd class="font-mono text-xs font-semibold text-[#B45309] text-right">0.0%, 0.50%, 0.75%, 1.00%, 1.25%</dd>
-                      </div>
-                      <div class="pt-2.5 flex items-center justify-between gap-3">
-                        <dt class="text-slate-500">Test Regimen</dt>
-                        <dd class="font-semibold text-[#0F3D6E] text-right">Compressive &amp; Flexural Strength</dd>
-                      </div>
-                    </dl>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-
-          <!-- ================================================================
-               EXPERIMENTAL OVERVIEW STRIP (3 Clean, Airy Summary Cards)
-               ================================================================ -->
-          <section class="max-w-6xl mx-auto px-4 sm:px-8 pt-14 pb-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
-              <!-- Card 1 -->
-              <div class="arch-card rounded-2xl p-6">
-                <div class="font-mono text-2xl font-extrabold text-[#0F3D6E]">M50</div>
-                <h3 class="text-base font-bold text-slate-900 mt-1.5">Concrete Matrix Grade</h3>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                  Dense interfacial transition zone (ITZ) for high-performance structural applications.
-                </p>
-              </div>
-
-              <!-- Card 2 -->
-              <div class="arch-card rounded-2xl p-6">
-                <div class="font-mono text-2xl font-extrabold text-[#B45309]">4 Dosages + Control</div>
-                <h3 class="text-base font-bold text-slate-900 mt-1.5">0.5% to 1.25% V<sub>f</sub></h3>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                  Systematic evaluation of fibre volume fraction on workability and peak capacity.
-                </p>
-              </div>
-
-              <!-- Card 3 -->
-              <div class="arch-card rounded-2xl p-6">
-                <div class="font-mono text-2xl font-extrabold text-[#1D5BA6]">2 Mechanical Tests</div>
-                <h3 class="text-base font-bold text-slate-900 mt-1.5">Compression &amp; Flexure</h3>
-                <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                  Measuring axial capacity, modulus of rupture, first-crack load, and post-peak toughness.
-                </p>
-              </div>
-
-            </div>
-          </section>
-
-          <!-- ================================================================
-               CHAPTER INDEX GRID ("Project Chapters" — 7 Clean Cards)
-               ================================================================ -->
-          <section id="chapters-section" class="max-w-6xl mx-auto px-4 sm:px-8 py-12 sm:py-16">
-            <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
-              <div>
-                <span class="font-mono text-xs uppercase tracking-widest text-[#B45309] font-semibold">
-                  Monograph Contents
-                </span>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
-                  Project Chapters
-                </h2>
-              </div>
-              <p class="text-sm text-slate-500">
-                Select any chapter to launch the slide presentation reader.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              ${CHAPTERS.map((chap) => `
-                <button type="button" onclick="openChapter('${chap.id}', 0)"
-                        class="arch-card arch-card-interactive text-left rounded-2xl p-6 flex flex-col justify-between gap-5 cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#1D5BA6]/40">
-                  <div>
-                    <div class="flex items-center justify-between gap-2 mb-3.5">
-                      <span class="font-mono text-xs font-bold px-2.5 py-1 rounded-md bg-slate-100 text-[#0F3D6E]">
-                        ${chap.number}
-                      </span>
-                      <span class="font-mono text-[11px] text-slate-500 bg-slate-50 border border-slate-200/80 px-2.5 py-0.5 rounded-full">
-                        ${chap.slides.length} ${chap.slides.length === 1 ? 'Slide' : 'Slides'}
-                      </span>
-                    </div>
-
-                    <h3 class="text-lg font-bold text-slate-900 leading-snug">
-                      ${chap.title}
-                    </h3>
-
-                    <p class="text-sm text-slate-600 mt-2 leading-relaxed">
-                      ${chap.summary}
-                    </p>
-                  </div>
-
-                  <div class="pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-[#0F3D6E]">
-                    <span>Open Chapter</span>
-                    <span aria-hidden="true">→</span>
-                  </div>
-                </button>
-              `).join('')}
-            </div>
-          </section>
-
-          <!-- ================================================================
-               ACADEMIC CREDITS FOOTER (Dignified 3-Column Attribution)
-               ================================================================ -->
-          <footer id="credits-section" class="border-t border-slate-200 bg-white mt-auto">
-            <div class="max-w-6xl mx-auto px-4 sm:px-8 py-12">
-              <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                
-                <!-- Column 1: Guided By -->
-                <div class="space-y-1.5">
-                  <div class="font-mono text-[11px] uppercase tracking-widest text-[#B45309] font-semibold">
-                    GUIDED BY
-                  </div>
-                  <div class="text-base font-bold text-slate-900">
-                    Dr. Rahul Bharatiya
-                  </div>
-                  <div class="text-xs text-slate-500">
-                    Department of Civil Engineering
-                  </div>
-                </div>
-
-                <!-- Column 2: Project By -->
-                <div class="space-y-1.5">
-                  <div class="font-mono text-[11px] uppercase tracking-widest text-[#B45309] font-semibold">
-                    PROJECT BY
-                  </div>
-                  <div class="text-sm font-bold text-slate-900">
-                    Atluri Karthikeyan Reddy <span class="font-mono text-xs font-medium text-slate-500">(23JE0138)</span>
-                  </div>
-                  <div class="text-sm font-bold text-slate-900">
-                    Saurav Kumar <span class="font-mono text-xs font-medium text-slate-500">(23JE0891)</span>
-                  </div>
-                </div>
-
-                <!-- Column 3: Assisted By -->
-                <div class="space-y-1.5">
-                  <div class="font-mono text-[11px] uppercase tracking-widest text-[#B45309] font-semibold">
-                    ASSISTED BY
-                  </div>
-                  <div class="text-base font-bold text-slate-900">
-                    Nikhil Ghatak <span class="font-mono text-xs font-medium text-slate-500">(23DR0094)</span>
-                  </div>
-                  <div class="text-xs text-slate-500">
-                    Research &amp; Laboratory Assistance
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </footer>
-
-        </div>
-      `;
-    }
-
-    /**
-     * RENDER PRESENTATION SLIDE VIEW (Generous Centered Slide Canvas max-w-4xl)
-     */
-    function renderPresentationView(viewport) {
-      const chap = CHAPTERS[appState.chapterIndex];
-      const slide = chap.slides[appState.slideIndex];
-      const totalSlides = chap.slides.length;
-      const isFirstOverall = appState.chapterIndex === 0 && appState.slideIndex === 0;
-      const isLastInChapter = appState.slideIndex === totalSlides - 1;
-      const isLastOverall = appState.chapterIndex === CHAPTERS.length - 1 && isLastInChapter;
-
-      // Update Bottom Presentation Footer Controls
-      const footer = document.getElementById('presentation-footer');
-      footer.classList.remove('hidden');
-
-      document.getElementById('slide-counter-text').textContent = `Slide ${appState.slideIndex + 1} of ${totalSlides}`;
-
-      const prevBtn = document.getElementById('btn-prev-slide');
-      if (isFirstOverall) {
-        prevBtn.disabled = true;
-        prevBtn.className = 'px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border border-slate-200 text-slate-300 cursor-not-allowed min-h-[40px]';
-      } else {
-        prevBtn.disabled = false;
-        prevBtn.className = 'px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 transition cursor-pointer min-h-[40px]';
-      }
-
-      const nextLabel = document.getElementById('btn-next-label');
-      if (isLastOverall) {
-        nextLabel.textContent = 'Finish & Return Home →';
-      } else if (isLastInChapter) {
-        nextLabel.textContent = 'Next Topic →';
-      } else {
-        nextLabel.textContent = 'Next →';
-      }
-
-      // Render Slide Canvas
-      viewport.innerHTML = `
-        <div class="flex-1 flex flex-col justify-center py-8 sm:py-12">
-          <div class="w-full max-w-4xl mx-auto px-4 sm:px-8 view-fade-enter">
+        <nav>
+            <a href="overview.html" class="side-link">
+                <span class="side-number">01</span> Overview
+            </a>
+
+            <a href="background.html" class="side-link">
+                <span class="side-number">02</span> Background
+            </a>
+
+            <a href="fibre.html" class="side-link">
+                <span class="side-number">03</span> Fibre-Reinforced Concrete
+            </a>
             
-            <!-- Slide Eyebrow & Heading -->
-            <div class="mb-7">
-              <div class="font-mono text-xs uppercase tracking-widest text-[#B45309] font-semibold mb-2">
-                ${slide.eyebrow}
-              </div>
-              <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                ${slide.title}
-              </h1>
-            </div>
+            <a href="compressive.html" class="side-link">
+                <span class="side-number">04</span> Compressive Strength Test
+            </a>
 
-            <!-- Slide Content -->
-            <div>
-              ${slide.render()}
-            </div>
+            <a href="flexural.html" class="side-link">
+                <span class="side-number">05</span> Flexural Strength Test
+            </a>
 
-          </div>
+            <a href="conclusion.html" class="side-link">
+                <span class="side-number">06</span> Conclusion
+            </a>
+
+            <a href="acknowledgement.html" class="side-link">
+                <span class="side-number">07</span> Acknowledgement
+            </a>
+            
+        </nav>
+    </aside>
+
+    <!-- Homepage -->
+    <main class="main">
+
+        <div class="tag">BACHELOR OF TECHNOLOGY PROJECT</div>
+
+        <h1>Fibre-Reinforced Concrete</h1>
+
+        <h2 class="subtitle ">
+            & its Mechanical Properties
+        </h2>
+
+        <div class="nav-grid">
+
+            <a href="overview.html" class="nav-card">
+                <span class="nav-text">OVERVIEW</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="background.html" class="nav-card">
+                <span class="nav-text">BACKGROUND</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="fibre.html" class="nav-card">
+                <span class="nav-text">FIBRE-REINFORCED CONCRETE</span>
+                <span class="arrow">›</span>
+            </a>
+
+
+            <a href="compressive.html" class="nav-card">
+                <span class="nav-text">COMPRESSIVE STRENGTH TEST</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="flexural.html" class="nav-card">
+                <span class="nav-text">FLEXURAL STRENGTH TEST</span>
+                <span class="arrow">›</span>
+            </a>
+
+            <a href="conclusion.html" class="nav-card">
+                <span class="nav-text">CONCLUSION</span>
+                <span class="arrow">›</span>
+            </a>
+
+<a href="acknowledgement.html" style="
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    min-height: 76px;
+    padding: 17px 18px;
+    color: rgb(190, 185, 185);
+    text-decoration: none;
+    text-align: center;
+    font-size: 100px;
+    font-family: 'Georgia', serif;
+">
+    <span class="nav-text">ACKNOWLEDGEMENT</span>
+    <span class="arrow">›</span>
+</a>
+        </a>
+
         </div>
-      `;
-    }
 
-    /**
-     * MASTER RENDER DISPATCHER
-     */
-    function renderApp() {
-      const viewport = document.getElementById('app-viewport');
-      renderHeader();
-      if (appState.view === 'home') {
-        renderHomeView(viewport);
-      } else {
-        renderPresentationView(viewport);
-      }
-    }
+        
+        <!-- <h3>PROJECT INFORMATION</h3> -->
 
-    /**
-     * CODE EXPORT MODAL LOGIC ("Get Website Code")
-     */
-    const DESIGN_TOKENS_CSS = `/* ==========================================================================
-   Architectural Monograph Design Tokens — Fibre-Reinforced Concrete Project
-   ========================================================================== */
-:root {
-  --bg-canvas: #F8FAFC;
-  --bg-card: #FFFFFF;
-  --border-hairline: #E2E8F0;
-  --navy-primary: #0F3D6E;
-  --royal-accent: #1D5BA6;
-  --brass-fibre: #B45309;
-  --ink-heading: #0F172A;
-  --ink-body: #475569;
-}
+ 
 
-body {
-  background-color: var(--bg-canvas);
-  color: var(--ink-heading);
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-}
+    
+<!-- Project Credits Footer -->
+<footer class="project-credits">
 
-h1, h2, h3, h4 {
-  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
-}
+    <div class="credit-column">
+        <span class="credit-label">GUIDED BY</span>
+        <h2>Dr. RAHUL BHARATIYA</h2>
+    </div>
 
-/* Faint Architectural Concrete Stipple & Structural Drafting Grid */
-.hero-architectural-grid {
-  background-color: #F8FAFC;
-  background-image:
-    radial-gradient(rgba(15, 61, 110, 0.055) 1px, transparent 1px),
-    linear-gradient(to right, rgba(15, 61, 110, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(15, 61, 110, 0.03) 1px, transparent 1px);
-  background-size: 20px 20px, 80px 80px, 80px 80px;
-}
+    <div class="credit-column">
+        <span class="credit-label">PROJECT BY</span>
+        <h2>ATLURI KARTHIKEYAN REDDY</h2>
+        <h2>23JE0138</h2>
+        <h2>SAURAV KUMAR</h2>
+        <h2>23JE0891</h2>
+    </div>
+    
+    <div class="credit-column">
+        <span class="credit-label">ASSISTED BY</span>
+        <h2>NIKHIL GHATE</h2>
+        <h2>23DR0094</h2>
+    </div>
 
-.arch-card {
-  background-color: var(--bg-card);
-  border: 1px solid var(--border-hairline);
-  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.03), 0 6px 24px -6px rgba(15, 23, 42, 0.04);
-}`;
+</footer>
 
-    function openCodeModal() {
-      const modal = document.getElementById('code-export-modal');
-      modal.classList.remove('hidden');
-      modal.classList.add('flex');
-      switchCodeTab('html');
-    }
 
-    function closeCodeModal() {
-      const modal = document.getElementById('code-export-modal');
-      modal.classList.add('hidden');
-      modal.classList.remove('flex');
-      document.getElementById('copy-feedback-text').classList.add('opacity-0');
-      document.getElementById('copy-code-btn-label').textContent = 'Copy Code';
-    }
+    </main>
 
-    function switchCodeTab(tab) {
-      appState.activeCodeTab = tab;
-      const htmlTabBtn = document.getElementById('tab-code-html');
-      const cssTabBtn = document.getElementById('tab-code-css');
-      const helper = document.getElementById('code-tab-helper');
-      const codeContainer = document.getElementById('code-snippet-container');
+    <script>
+        const menuBtn = document.getElementById("menuBtn");
+        const closeBtn = document.getElementById("closeBtn");
+        const overlay = document.getElementById("overlay");
 
-      document.getElementById('copy-feedback-text').classList.add('opacity-0');
-      document.getElementById('copy-code-btn-label').textContent = 'Copy Code';
+        function openSidebar() {
+            document.body.classList.add("sidebar-open");
+            menuBtn.setAttribute("aria-expanded", "true");
+        }
 
-      if (tab === 'html') {
-        htmlTabBtn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-white text-[#0F3D6E] shadow-xs transition cursor-pointer';
-        cssTabBtn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer';
-        helper.innerHTML = 'This complete, dependency-free single-file <code class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">index.html</code> includes the Home page, all 7 project chapters, and architectural SVG schematics.';
-        codeContainer.textContent = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
-      } else {
-        cssTabBtn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-semibold bg-white text-[#0F3D6E] shadow-xs transition cursor-pointer';
-        htmlTabBtn.className = 'px-3.5 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-600 hover:text-slate-900 transition cursor-pointer';
-        helper.innerHTML = 'Standalone <code class="font-mono bg-slate-100 px-1.5 py-0.5 rounded text-slate-800">styles.css</code> tokens for the alabaster canvas, cobalt primary, and brass fibre accent palette.';
-        codeContainer.textContent = DESIGN_TOKENS_CSS;
-      }
-    }
+        function closeSidebar() {
+            document.body.classList.remove("sidebar-open");
+            menuBtn.setAttribute("aria-expanded", "false");
+        }
 
-    function copyActiveCodeSnippet() {
-      const codeText = document.getElementById('code-snippet-container').textContent;
-      const tempArea = document.createElement('textarea');
-      tempArea.value = codeText;
-      tempArea.style.position = 'fixed';
-      tempArea.style.left = '-9999px';
-      document.body.appendChild(tempArea);
-      tempArea.select();
-      try {
-        document.execCommand('copy');
-        document.getElementById('copy-feedback-text').classList.remove('opacity-0');
-        document.getElementById('copy-code-btn-label').textContent = 'Copied!';
-      } catch (err) {
-        // Fallback handled silently
-      }
-      document.body.removeChild(tempArea);
-    }
+        menuBtn.addEventListener("click", openSidebar);
+        closeBtn.addEventListener("click", closeSidebar);
+        overlay.addEventListener("click", closeSidebar);
 
-    // Close modal on backdrop click
-    document.getElementById('code-export-modal').addEventListener('click', (e) => {
-      if (e.target.id === 'code-export-modal') closeCodeModal();
-    });
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape") {
+                closeSidebar();
+            }
+        });
+    </script>
 
-    // Initialize Application
-    window.onload = function () {
-      renderApp();
-    };
-  </script>
 </body>
 </html>
