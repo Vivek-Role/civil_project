@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Conclusion | Fibre-Reinforced Concrete</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;color:#111;background:#fff}
+.top-nav{height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 6%;border-bottom:1px solid #ddd;border-top:12px solid #383838;background:#fff}
+.top-nav a{color:#1769aa;text-decoration:none;font-size:16px}
+.top-nav span{font-size:16px}
+.progress-track{height:4px;background:#eee;width:100%}
+.progress-fill{height:100%;width:20%;background:#1769aa;transition:width .25s ease}
+.content{max-width:1050px;width:calc(100% - 40px);margin:45px auto 110px}
+.slide{display:none;min-height:490px}
+.slide.active{display:block}
+.kicker{font-size:12px;letter-spacing:1.1px;text-transform:uppercase;color:#c65b3c;font-weight:700;margin:0 0 10px}
+h1{font-size:34px;line-height:1.2;margin:0 0 12px;color:#202b40}
+.subtitle{font-size:17px;line-height:1.6;color:#555;margin:0 0 28px}
+.accent-line{height:4px;width:66px;background:#c65b3c;margin:18px 0 24px}
+/* Slide 1 chart */
+.chart-card{border:1px solid #e1e4e8;border-radius:5px;padding:20px 22px 16px;background:#fafafa}
+.legend{display:flex;justify-content:flex-end;gap:18px;flex-wrap:wrap;font-size:13px;color:#444;margin-bottom:16px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.swatch{display:inline-block;width:10px;height:10px;border-radius:1px}
+.chart{height:285px;display:flex;align-items:flex-end;justify-content:space-around;border-bottom:2px solid #202b40;padding:12px 8px 0;gap:12px}
+.group{height:100%;flex:1;display:flex;align-items:flex-end;justify-content:center;gap:7px;position:relative;min-width:0}
+.bar-wrap{height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:7px;flex:0 1 38px}
+.bar{width:100%;max-width:38px;min-height:3px;border-radius:3px 3px 0 0;position:relative}
+.bar.seven{background:#9aa9bf}.bar.twenty-eight{background:#202b40}.bar.optimal-seven{background:#ef9278}.bar.optimal-twenty-eight{background:#d65c3d}
+.bar-value{font-size:12px;font-weight:700;color:#333;white-space:nowrap}
+.group-label{display:flex;justify-content:space-around;gap:7px;text-align:center;font-size:13px;font-weight:600;color:#202b40;padding-top:10px}
+.group-label span{flex:1}
+.chart-note{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;border-top:1px solid #e2e2e2;margin-top:16px;padding-top:12px;font-size:12px;color:#555}
+/* Slide 2 benchmark */
+.peak-panel{text-align:center;padding:12px 0 6px}
+.peak-value{font-size:clamp(64px,10vw,108px);line-height:1;font-weight:800;color:#d65c3d;letter-spacing:-3px}
+.peak-unit{font-size:24px;font-weight:700;color:#202b40}
+.peak-caption{font-size:18px;color:#444;margin:18px 0 28px}
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);max-width:760px;margin:0 auto;border-top:1px solid #ddd;padding-top:22px}
+.stat{padding:0 14px;border-right:1px solid #e2e2e2}.stat:last-child{border-right:0}
+.stat strong{display:block;font-size:26px;color:#202b40;margin-bottom:7px}.stat:last-child strong{color:#c65b3c}
+.stat span{font-size:14px;color:#555;line-height:1.4}
+/* Slide 3 progression */
+.progression{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:62px;position:relative}
+.progression:before{content:"";position:absolute;top:18px;left:8%;right:8%;height:2px;background:#d9dee5;z-index:0}
+.stage{position:relative;z-index:1;background:#fff;padding:0 4px}
+.stage-number{width:38px;height:38px;border-radius:50%;background:#202b40;color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;margin-bottom:20px}
+.stage.optimal .stage-number{background:#d65c3d}
+.stage h2{font-size:19px;line-height:1.25;margin:0 0 10px;color:#202b40}
+.stage.optimal h2,.stage.optimal .stage-value{color:#c65b3c}
+.stage-value{font-size:17px;font-weight:700;margin:0 0 12px;color:#202b40}
+.stage p{font-size:14px;line-height:1.55;color:#555;margin:0}
+/* Slide 4 comparison */
+.comparison{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:35px}
+.compare-card{padding:22px 24px;border-top:4px solid #c65b3c;background:#fafafa}
+.compare-card.over{border-top-color:#9aa9bf}
+.compare-label{font-size:12px;text-transform:uppercase;letter-spacing:1px;font-weight:700;color:#c65b3c;margin:0 0 12px}
+.compare-card.over .compare-label{color:#66758a}
+.compare-card h2{font-size:25px;color:#202b40;margin:0 0 18px}
+.compare-rule{height:2px;background:#c65b3c;margin-bottom:18px}.over .compare-rule{background:#9aa9bf}
+.compare-card p{font-size:15px;line-height:1.7;margin:0 0 11px;color:#333}
+.compare-card strong{color:#202b40}
+/* Slide 5 conclusions */
+.conclusion-list{display:grid;gap:22px;margin-top:48px;max-width:900px}
+.conclusion-item{display:grid;grid-template-columns:34px 1fr;gap:14px;align-items:start}
+.conclusion-icon{width:28px;height:28px;border-radius:50%;background:#c65b3c;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.conclusion-item:nth-child(2) .conclusion-icon{background:#202b40}
+.conclusion-item:nth-child(3) .conclusion-icon{background:#66758a}
+.conclusion-item:nth-child(4) .conclusion-icon{background:#c65b3c}
+.conclusion-item p{font-size:19px;line-height:1.55;margin:0;color:#30343a}
+.conclusion-item strong{color:#202b40}
+.bottom-nav{position:fixed;bottom:0;left:0;width:100%;min-height:82px;background:#fff;border-top:1px solid #ddd;display:flex;align-items:center;justify-content:space-between;padding:14px 6%;z-index:10}
+.slide-count{color:#555;font-size:14px}
+.nav-buttons{display:flex;gap:10px}
+.nav-buttons button{padding:12px 20px;font-size:14px;border-radius:6px;border:1px solid #1769aa;background:#1769aa;color:white;cursor:pointer}
+.nav-buttons button:disabled{background:white;color:#a8c6df;border-color:#b8d0e6;cursor:default}
+@media(max-width:700px){.top-nav{padding:0 20px}.content{width:calc(100% - 32px);margin-top:30px;margin-bottom:110px}.slide{min-height:0}h1{font-size:28px}.subtitle{font-size:16px}.chart-card{padding:14px 10px}.chart{height:230px;gap:4px;padding-left:0;padding-right:0}.bar-wrap{flex-basis:29px}.bar-value{font-size:10px}.group-label{font-size:11px}.legend{font-size:11px;gap:10px}.chart-note{font-size:11px}.stat-row{grid-template-columns:1fr;gap:16px}.stat{border-right:0;border-bottom:1px solid #e2e2e2;padding-bottom:14px}.stat:last-child{border-bottom:0}.progression{grid-template-columns:1fr 1fr;gap:26px 16px;margin-top:35px}.progression:before{display:none}.stage h2{font-size:17px}.stage p{font-size:13px}.comparison{grid-template-columns:1fr;gap:18px}.compare-card{padding:18px}.conclusion-list{gap:19px;margin-top:32px}.conclusion-item p{font-size:16px}.bottom-nav{padding:12px 16px}.nav-buttons button{padding:10px 12px}}
+</style>
+</head>
+<body>
+<div class="top-nav">
+  <a href="index.html">← Home</a>
+  <span>Conclusion</span>
+</div>
+<div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+<main class="content">
+  <!-- SLIDE 1: PDF PAGE 5 -->
+  <section class="slide active">
+    <p class="kicker">Mean Compressive Strength (N/mm²)</p>
+    <h1>7-Day vs. 28-Day Strength by Dosage</h1>
+    <div class="accent-line"></div>
+    <p class="subtitle">7-day and 28-day mean cube performance across 0.50% to 1.25% fibre dosages.</p>
+    <div class="chart-card">
+      <div class="legend">
+        <span><i class="swatch" style="background:#9aa9bf"></i>7-Day Mean</span>
+        <span><i class="swatch" style="background:#202b40"></i>28-Day Mean</span>
+        <span><i class="swatch" style="background:#d65c3d"></i>Optimal 1.00% Peak</span>
+      </div>
+      <div class="chart" aria-label="Grouped bar chart of seven-day and twenty-eight-day mean compressive strength by fibre dosage">
+        <div class="group">
+          <div class="bar-wrap"><span class="bar-value">40.35</span><div class="bar seven" style="height:67.25%"></div></div>
+          <div class="bar-wrap"><span class="bar-value">52.05</span><div class="bar twenty-eight" style="height:86.75%"></div></div>
+        </div>
+        <div class="group">
+          <div class="bar-wrap"><span class="bar-value">39.52</span><div class="bar seven" style="height:65.87%"></div></div>
+          <div class="bar-wrap"><span class="bar-value">51.00</span><div class="bar twenty-eight" style="height:85%"></div></div>
+        </div>
+        <div class="group">
+          <div class="bar-wrap"><span class="bar-value">41.44</span><div class="bar optimal-seven" style="height:69.07%"></div></div>
+          <div class="bar-wrap"><span class="bar-value" style="color:#c65b3c">53.33</span><div class="bar optimal-twenty-eight" style="height:88.88%"></div></div>
+        </div>
+        <div class="group">
+          <div class="bar-wrap"><span class="bar-value">38.38</span><div class="bar seven" style="height:63.97%"></div></div>
+          <div class="bar-wrap"><span class="bar-value">49.52</span><div class="bar twenty-eight" style="height:82.53%"></div></div>
+        </div>
+      </div>
+      <div class="group-label"><span>0.50% Fibre</span><span>0.75% Fibre</span><span style="color:#c65b3c">1.00% Fibre</span><span>1.25% Fibre</span></div>
+      <div class="chart-note"><span>M50 Design Benchmark: 50.00 N/mm² at 28 days</span><span style="color:#c65b3c">0.50%–1.00% exceed 50 N/mm²; 1.25% drops to 49.52 N/mm²</span></div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: PDF PAGE 6 -->
+  <section class="slide">
+    <p class="kicker">Optimal Dosage Benchmark</p>
+    <h1>Peak 28-Day Compressive Strength</h1>
+    <div class="accent-line"></div>
+    <div class="peak-panel">
+      <div><span class="peak-value">53.33</span> <span class="peak-unit">N/mm²</span></div>
+      <div class="accent-line" style="margin:24px auto 18px;width:54px;background:#202b40;height:2px"></div>
+      <p class="peak-caption">Achieved at 1.00% fibre volume fraction (41.44 N/mm² at 7 days)</p>
+      <div class="stat-row">
+        <div class="stat"><strong>+2.46%</strong><span>Higher than 0.50% mix</span></div>
+        <div class="stat"><strong>+4.57%</strong><span>Higher than 0.75% mix</span></div>
+        <div class="stat"><strong>+7.69%</strong><span>Higher than 1.25% mix</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: PDF PAGE 8 -->
+  <section class="slide">
+    <p class="kicker">Behavioral Progression</p>
+    <h1>Strength Evolution Across Dosages</h1>
+    <div class="accent-line"></div>
+    <div class="progression">
+      <article class="stage">
+        <div class="stage-number">01</div>
+        <h2>0.50% Dosage</h2>
+        <div class="stage-value">52.05 N/mm²</div>
+        <p>Exceeds M50 design target.</p>
+      </article>
+      <article class="stage">
+        <div class="stage-number">02</div>
+        <h2>0.75% Dosage</h2>
+        <div class="stage-value">51.00 N/mm²</div>
+        <p>Maintains M50 grade compliance.</p>
+      </article>
+      <article class="stage optimal">
+        <div class="stage-number">03</div>
+        <h2>1.00% Dosage</h2>
+        <div class="stage-value">53.33 N/mm²</div>
+        <p>Peak optimal matrix performance.</p>
+      </article>
+      <article class="stage">
+        <div class="stage-number">04</div>
+        <h2>1.25% Dosage</h2>
+        <div class="stage-value">49.52 N/mm²</div>
+        <p>Fibre balling reduces strength.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: PDF PAGE 10 -->
+  <section class="slide">
+    <p class="kicker">Dosage Threshold Analysis</p>
+    <h1>Optimal vs. Over-Dosage Behavior</h1>
+    <div class="accent-line"></div>
+    <div class="comparison">
+      <article class="compare-card">
+        <p class="compare-label">Optimal Volume Fraction</p>
+        <h2>1.00% Fibre Dosage</h2>
+        <div class="compare-rule"></div>
+        <p><strong>28-Day Mean:</strong> 53.33 N/mm² peak performance.</p>
+        <p><strong>7-Day Mean:</strong> 41.44 N/mm² early strength gain.</p>
+        <p><strong>Cube Range:</strong> 52.85 to 53.85 N/mm² consistency.</p>
+        <p><strong>Matrix Quality:</strong> Uniform dispersion without clumping.</p>
+      </article>
+      <article class="compare-card over">
+        <p class="compare-label">Saturation Threshold</p>
+        <h2>1.25% Fibre Dosage</h2>
+        <div class="compare-rule"></div>
+        <p><strong>28-Day Mean:</strong> 49.52 N/mm² below M50 grade.</p>
+        <p><strong>7-Day Mean:</strong> 38.38 N/mm² lowest early strength.</p>
+        <p><strong>Strength Drop:</strong> -7.14% reduction from 1.00% peak.</p>
+        <p><strong>Compaction Loss:</strong> Fibre balling impairs workability.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: PDF PAGE 11 -->
+  <section class="slide">
+    <p class="kicker">Summary &amp; Next Phase</p>
+    <h1>Key Engineering Conclusions</h1>
+    <div class="accent-line"></div>
+    <div class="conclusion-list">
+      <div class="conclusion-item"><div class="conclusion-icon">✓</div><p><strong>Optimal Dosage:</strong> 1.00% fibre delivers peak 53.33 N/mm² strength.</p></div>
+      <div class="conclusion-item"><div class="conclusion-icon">◆</div><p><strong>M50 Compliance:</strong> 0.50% to 1.00% mixes exceed 50 N/mm² grade.</p></div>
+      <div class="conclusion-item"><div class="conclusion-icon">!</div><p><strong>Over-Dosage Limit:</strong> 1.25% fibre causes balling and strength loss.</p></div>
+      <!-- <div class="conclusion-item"><div class="conclusion-icon">→</div><p><strong>Flexural Evaluation:</strong> Quantify modulus of rupture and post-cracking ductility.</p></div> -->
+    </div>
+  </section>
+</main>
+<div class="bottom-nav">
+  <span class="slide-count" id="slideCount">Slide 1 of 5</span>
+  <div class="nav-buttons">
+    <button id="prevBtn" type="button" disabled>← Previous</button>
+    <button id="nextBtn" type="button">Next →</button>
+  </div>
+</div>
+<script>
+const slides=document.querySelectorAll('.slide');
+const prevBtn=document.getElementById('prevBtn');
+const nextBtn=document.getElementById('nextBtn');
+const slideCount=document.getElementById('slideCount');
+const progressFill=document.getElementById('progressFill');
+let currentSlide=0;
+function showSlide(index){
+  currentSlide=Math.max(0,Math.min(index,slides.length-1));
+  slides.forEach((slide,i)=>slide.classList.toggle('active',i===currentSlide));
+  slideCount.textContent=`Slide ${currentSlide+1} of ${slides.length}`;
+  progressFill.style.width=`${((currentSlide+1)/slides.length)*100}%`;
+  prevBtn.disabled=currentSlide===0;
+  nextBtn.disabled=false;
+  nextBtn.textContent=currentSlide===slides.length-1?'Next Topic →':'Next →';
+}
+prevBtn.addEventListener('click',()=>showSlide(currentSlide-1));
+nextBtn.addEventListener('click',()=>{
+  if(currentSlide<slides.length-1) showSlide(currentSlide+1);
+  else window.location.href='acknowledgement.html';
+});
+document.addEventListener('keydown',event=>{
+  if(event.key==='ArrowRight'){
+    if(currentSlide<slides.length-1) showSlide(currentSlide+1);
+    else window.location.href='acknowledgement.html';
+  }
+  if(event.key==='ArrowLeft') showSlide(currentSlide-1);
+});
+showSlide(0);
+</script>
+</body>
+</html>
