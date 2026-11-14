@@ -243,7 +243,7 @@
         <span class="slide-count" id="slideCount">Slide 1 of 3</span>
 
         <div class="buttons">
-            <button id="previousBtn" onclick="changeSlide(-1)" disabled>
+            <button id="previousBtn" onclick="changeSlide(-1)">
                 ← Previous
             </button>
 
@@ -271,7 +271,7 @@
 
         currentSlide = index;
 
-        previousBtn.disabled = currentSlide === 0;
+        previousBtn.disabled = false;
 
         nextBtn.textContent =
             currentSlide === slides.length - 1
@@ -286,6 +286,11 @@
     }
 
     function changeSlide(direction) {
+        if (direction === -1 && currentSlide === 0) {
+            window.location.href = "overview.html?slide=last";
+            return;
+        }
+
         if (currentSlide === slides.length - 1 && direction === 1) {
             window.location.href = "fibre.html";
             return;
@@ -296,6 +301,13 @@
         if (nextIndex >= 0 && nextIndex < slides.length) {
             showSlide(nextIndex);
         }
+    }
+
+    const requestedSlide = new URLSearchParams(window.location.search).get("slide");
+    if (requestedSlide === "last") {
+        showSlide(slides.length - 1);
+    } else {
+        showSlide(0);
     }
 
     document.addEventListener("keydown", function(event) {

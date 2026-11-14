@@ -485,13 +485,17 @@ function showSlide(index) {
 
     slideCount.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
     progressFill.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
-    prevBtn.disabled = currentSlide === 0;
+    prevBtn.disabled = false;
     nextBtn.disabled = false;
     nextBtn.textContent = currentSlide === slides.length - 1 ? 'Next Topic →' : 'Next →';
 }
 
 prevBtn.addEventListener('click', () => {
-    if (currentSlide > 0) showSlide(currentSlide - 1);
+    if (currentSlide === 0) {
+        window.location.href = 'fibre.html?slide=last';
+    } else {
+        showSlide(currentSlide - 1);
+    }
 });
 
 nextBtn.addEventListener('click', () => {
@@ -502,7 +506,8 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
-showSlide(0);
+const requestedSlide = new URLSearchParams(window.location.search).get('slide');
+showSlide(requestedSlide === 'last' ? slides.length - 1 : 0);
 </script>
 
 </body>

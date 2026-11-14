@@ -484,22 +484,31 @@ function showSlide(index) {
     slideCount.textContent =
         `Slide ${currentSlide + 1} of ${slides.length}`;
 
-    prevBtn.disabled = currentSlide === 0;
-    nextBtn.disabled = currentSlide === slides.length - 1;
+    prevBtn.disabled = false;
+    // Keep Next enabled on the final slide so it can open conclusion.html.
+    nextBtn.disabled = false;
 
     nextBtn.textContent =
-        currentSlide === slides.length - 1 ? "Last slide" : "Next →";
+        currentSlide === slides.length - 1 ? "Next Topic →" : "Next →";
 
     progressFill.style.width =
         `${((currentSlide + 1) / slides.length) * 100}%`;
 }
 
 prevBtn.addEventListener("click", () => {
-    showSlide(currentSlide - 1);
+    if (currentSlide === 0) {
+        window.location.href = "compressive.html?slide=last";
+    } else {
+        showSlide(currentSlide - 1);
+    }
 });
 
 nextBtn.addEventListener("click", () => {
-    showSlide(currentSlide + 1);
+    if (currentSlide === slides.length - 1) {
+        window.location.href = "conclusion.html";
+    } else {
+        showSlide(currentSlide + 1);
+    }
 });
 
 document.addEventListener("keydown", (event) => {
@@ -512,7 +521,8 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-showSlide(0);
+const requestedSlide = new URLSearchParams(window.location.search).get("slide");
+showSlide(requestedSlide === "last" ? slides.length - 1 : 0);
 </script>
 
 </body>

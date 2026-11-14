@@ -296,7 +296,7 @@
 
         currentSlide = index;
 
-        previousBtn.disabled = currentSlide === 0;
+        previousBtn.disabled = false;
 
         nextBtn.textContent =
             currentSlide === slides.length - 1
@@ -311,16 +311,25 @@
     }
 
     function changeSlide(direction) {
-        if (currentSlide === slides.length - 1 && direction === 1) {
+        if (direction === -1 && currentSlide === 0) {
+            window.location.href = "background.html?slide=last";
+            return;
+        }
+
+        if (direction === 1 && currentSlide === slides.length - 1) {
             window.location.href = "compressive.html";
             return;
         }
 
         const nextIndex = currentSlide + direction;
+        if (nextIndex >= 0 && nextIndex < slides.length) showSlide(nextIndex);
+    }
 
-        if (nextIndex >= 0 && nextIndex < slides.length) {
-            showSlide(nextIndex);
-        }
+    const requestedSlide = new URLSearchParams(window.location.search).get("slide");
+    if (requestedSlide === "last") {
+        showSlide(slides.length - 1);
+    } else {
+        showSlide(0);
     }
 
     document.addEventListener("keydown", function(event) {
