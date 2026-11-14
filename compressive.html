@@ -506,6 +506,22 @@ nextBtn.addEventListener('click', () => {
     }
 });
 
+// Keyboard navigation: use the left and right arrow keys to change slides.
+document.addEventListener('keydown', (event) => {
+    // Do not intercept keys while the user is typing in a form field.
+    if (event.target.matches('input, textarea, select, [contenteditable="true"]')) {
+        return;
+    }
+
+    if (event.key === 'ArrowRight' && !nextBtn.disabled) {
+        event.preventDefault();
+        nextBtn.click();
+    } else if (event.key === 'ArrowLeft' && !prevBtn.disabled) {
+        event.preventDefault();
+        prevBtn.click();
+    }
+});
+
 const requestedSlide = new URLSearchParams(window.location.search).get('slide');
 showSlide(requestedSlide === 'last' ? slides.length - 1 : 0);
 </script>
