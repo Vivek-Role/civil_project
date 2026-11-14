@@ -260,11 +260,11 @@ tbody tr {
                 <tr>
                     <th>Material Component</th>
                     <th>Specification / Classification</th>
-                    <th>0.0% (Control)</th>
-                    <th>0.5% Fibre (Vf)</th>
-                    <th>0.75% Fibre (Vf)</th>
-                    <th>1.0% Fibre (Vf)</th>
-                    <th>1.25% Fibre (Vf)</th>
+                    <th>0.0% (Control)<br>(kg/m<sup>3</sup>)</th>
+                    <th>0.5% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
+                    <th>0.75% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
+                    <th>1.0% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
+                    <th>1.25% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
                 </tr>
             </thead>
 
@@ -272,51 +272,53 @@ tbody tr {
                 <tr>
                     <td>Cement</td>
                     <td>OPC 53 Grade (IS 269)</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>445</td><td>445</td><td>445</td><td>445</td><td>445</td>
                 </tr>
                 <tr>
                     <td>Fly Ash</td>
                     <td>Class F Pozzolan (IS 3812)</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>52</td><td>52</td><td>52</td><td>52</td><td>52</td>
                 </tr>
                 <tr>
                     <td>Silica Fume</td>
                     <td>Micro-silica Powder (IS 15388)</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>16</td><td>16</td><td>16</td><td>16</td><td>16</td>
                 </tr>
                 <tr>
                     <td>Water</td>
                     <td>Clean Potable Water (IS 456)</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>Not specified</td><td>Not specified</td><td>Not specified</td><td>Not specified</td><td>Not specified</td>
                 </tr>
                 <tr>
                     <td>Sand (Fine Aggregate)</td>
                     <td>Clean Graded / Zone II (IS 383)</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>144</td><td>144</td><td>144</td><td>144</td><td>144</td>
                 </tr>
                 <tr>
-                    <td>Coarse Aggregate (< 10 mm)</td>
-                    <td>10 mm down crushed stone</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
-                </tr>
-                <tr>
-                    <td>Coarse Aggregate (> 10 mm)</td>
-                    <td>20 mm down crushed stone</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>Coarse Aggregate (combined &lt;10 mm and &gt;10 mm)</td>
+                    <td>10 mm and 20 mm down crushed stone; combined quantity</td>
+                    <td>1210</td><td>1210</td><td>1210</td><td>1210</td><td>1210</td>
                 </tr>
                 <tr>
                     <td>Fibre</td>
                     <td>Discrete Reinforcing Fibre</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>0</td><td>4.55</td><td>6.85</td><td>9.1</td><td>11.4</td>
                 </tr>
                 <tr>
                     <td>Admixture</td>
                     <td>PCE Superplasticizer (IS 9103)</td>
-                    <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+                    <td>5.2</td><td>5.2</td><td>5.2</td><td>5.2</td><td>5.2</td>
                 </tr>
             </tbody>
         </table>
         </div>
+
+        <p style="margin-top: 18px; font-size: 15px; line-height: 1.6;">
+            <strong>Recorded compressive strength reference (M50):</strong>
+            Without fibre — 7-day: 51 N/mm²; 28-day: 60 N/mm².
+            With 1% fibre — 28-day: 53.3 N/mm²
+            (7-day value not specified in the provided note).
+        </p>
     </section>
 
     <!-- SLIDE 4: APPARATUS -->
@@ -489,7 +491,8 @@ function showSlide(index) {
     slideCount.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
     progressFill.style.width = `${((currentSlide + 1) / slides.length) * 100}%`;
     prevBtn.disabled = currentSlide === 0;
-    nextBtn.disabled = currentSlide === slides.length - 1;
+    nextBtn.disabled = false;
+    nextBtn.textContent = currentSlide === slides.length - 1 ? 'Next Topic →' : 'Next →';
 }
 
 prevBtn.addEventListener('click', () => {
@@ -497,7 +500,11 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
-    if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+    if (currentSlide < slides.length - 1) {
+        showSlide(currentSlide + 1);
+    } else {
+        window.location.href = 'flexural.html';
+    }
 });
 
 showSlide(0);
