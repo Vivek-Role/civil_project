@@ -243,11 +243,18 @@ nextBtn.addEventListener('click',()=>{
   else window.location.href='acknowledgement.html';
 });
 document.addEventListener('keydown',event=>{
+  // Keep keyboard navigation consistent with the Previous and Next buttons.
+  if(event.target.matches('input, textarea, select, [contenteditable="true"]')) return;
+
   if(event.key==='ArrowRight'){
+    event.preventDefault();
     if(currentSlide<slides.length-1) showSlide(currentSlide+1);
-    else window.location.href='acknowledgement.html';
+    else nextBtn.click();
+  } else if(event.key==='ArrowLeft'){
+    event.preventDefault();
+    if(currentSlide===0) prevBtn.click();
+    else showSlide(currentSlide-1);
   }
-  if(event.key==='ArrowLeft') showSlide(currentSlide-1);
 });
 const requestedSlide=new URLSearchParams(window.location.search).get('slide');
 showSlide(requestedSlide==='last'?slides.length-1:0);

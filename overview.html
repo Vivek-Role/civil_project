@@ -214,8 +214,8 @@
 
         <h2>Mechanical Testing Regimen:</h2>
         <ul>
-            <li>Compressive Strength Test: </li>
-            <li>Flexural Strength Test: </li>
+            <li>Compressive Strength Test: Evaluates axial capacity, stiffness, and matrix-fiber load redistribution.</li>
+            <li>Flexural Strength Test: Evaluates modulus of rupture, first-crack strength, and post-peak flexural toughness under standard bending loads.</li>
         </ul>
     </section>
 
@@ -288,6 +288,14 @@
         if (nextIndex >= 0 && nextIndex < slides.length) {
             showSlide(nextIndex);
         }
+    }
+
+    // Open the final overview slide when arriving from the first Background slide.
+    const requestedSlide = new URLSearchParams(window.location.search).get("slide");
+    if (requestedSlide === "last") {
+        showSlide(slides.length - 1);
+    } else {
+        showSlide(0);
     }
 
     document.addEventListener("keydown", function(event) {
