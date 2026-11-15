@@ -144,6 +144,36 @@
     cursor: pointer;
 }
 
+
+        /* Images appear below the text in the same layout on Slides 2 and 3 */
+        .slide-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 28px;
+            width: 100%;
+            margin-top: 28px;
+        }
+
+        .slide-image {
+            display: block;
+            width: calc(50% - 14px);
+            height: 165px;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        @media (max-width: 600px) {
+            .slide-images {
+                gap: 14px;
+                margin-top: 22px;
+            }
+
+            .slide-image {
+                height: 125px;
+            }
+        }
+
         @keyframes appear {
             from {
                 opacity: 0;
@@ -238,7 +268,12 @@
 </p>
 
    
-</section>
+    <div class="slide-images">
+        <img src="image1.png" class="slide-image" alt="Slide 2 first image">
+        <img src="image2.png" class="slide-image" alt="Slide 2 second image">
+    </div>
+
+    </section>
 
 
 <!-- SLIDE 3 -->
@@ -261,6 +296,10 @@
         The quantity of fibers directly determines crack-arrest density. Systematic variation in fiber volume fraction dictates the transition from single-crack brittle failure to multi-cracking pseudo-ductility under bending and axial tension.
     </p>
 
+    <div class="slide-images">
+        <img src="image3.png" class="slide-image" alt="Slide 3 first image">
+        <img src="image4.png" class="slide-image" alt="Slide 3 second image">
+    </div>
 </section>
 
 
