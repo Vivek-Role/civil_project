@@ -146,6 +146,67 @@ tbody tr {
     background: #fff;
 }
 
+/* Workability Verification Card (Slide 3) */
+.verification-card {
+    margin-top: 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    background: #fff;
+    padding: 16px 20px 20px;
+}
+
+.verification-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.verification-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: #1e293b;
+    text-transform: uppercase;
+}
+
+.verification-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: #1769aa;
+    background: #f0f7ff;
+    border: 1px solid #d0e4f7;
+    border-radius: 999px;
+    padding: 4px 12px;
+}
+
+.verification-image-box {
+    background: #fff;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.verification-image-box img {
+    display: block;
+    width: 340px;
+    max-width: 100%;
+    max-height: 230px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+.slide .verification-caption {
+    margin: 14px 0 0;
+    font-size: 13.5px;
+    line-height: 1.5;
+    color: #334155;
+    text-align: left;
+}
+
 /* Bottom navigation - same style as Overview */
 .bottom-nav {
     position: fixed;
@@ -257,11 +318,10 @@ tbody tr {
             acceptance) per IS 516 (Part 1 / Section 1), evaluating
             load-bearing capacity and cracking mechanics.
         </p>
-        <div class="slide-images ">
-        <!-- <img src="image1.png" class="slide-image" alt="Slide 2 first image"> -->
-        <img src="image5.jpg" class="slide-image" alt="Slide 2 second image">
-        <p class="image-caption">Clicked manually</p>
-    </div>
+        <div class="slide-images">
+            <img src="image5.jpg" class="slide-image" alt="Compressive strength specimen">
+            <p class="image-caption">Fig 3.1 Clicked manually</p>
+        </div>
     </section>
 
     <!-- SLIDE 2: THEORY -->
@@ -298,7 +358,6 @@ tbody tr {
                 <tr>
                     <th>Material Component</th>
                     <th>Specification / Classification</th>
-                    <!-- <th>0.0% (Control)<br>(kg/m<sup>3</sup>)</th> -->
                     <th>0.5% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
                     <th>0.75% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
                     <th>1.0% Fibre (Vf)<br>(kg/m<sup>3</sup>)</th>
@@ -334,11 +393,11 @@ tbody tr {
                 </tr>
                 <tr>
                     <td rowspan="2">Coarse Aggregate</td>
-                    <td>&lt;10 mm</td>
+                    <td><10 mm</td>
                     <td>1210</td><td>1210</td><td>1210</td><td>1210</td>
                 </tr>
                 <tr>
-                    <td>&gt;10 mm</td>
+                    <td>>10 mm</td>
                     <td>1210</td><td>1210</td><td>1210</td><td>1210</td>
                 </tr>
                 <tr>
@@ -351,11 +410,28 @@ tbody tr {
                     <td>PCE Superplasticizer (IS 9103)</td>
                     <td>5.2</td><td>5.2</td><td>5.2</td><td>5.2</td>
                 </tr>
+                <tr>
+                    <td>Slump</td>
+                    <td>IS 1199 (Part 2), measured on trial batches</td>
+                    <td>120mm</td><td>80mm</td><td>50mm</td><td>0</td>
+                </tr>
             </tbody>
         </table>
         </div>
 
-
+        <!-- Workability Verification Image Card -->
+        <div class="verification-card">
+            <div class="verification-header">
+                <span class="verification-title">WORKABILITY VERIFICATION</span>
+                <span class="verification-badge">IS 1199 (Part 2)</span>
+            </div>
+            <div class="verification-image-box">
+                <img src="image7.jpg" alt="Workability Verification - Slump Test">
+            </div>
+            <p class="verification-caption">
+                <strong>Fig. 3.2:</strong> Slump cone workability test on Polypropylene Fibre-Reinforced Concrete (PP-FRC) per IS 1199 (Part 2), showing cohesive matrix binding and uniform dispersion of 50 mm × 0.1 mm discrete fibres.
+            </p>
+        </div>
     </section>
 
     <!-- SLIDE 4: APPARATUS -->
@@ -496,8 +572,6 @@ tbody tr {
             </tbody>
         </table>
         </div>
-
-       
     </section>
 
 </main>
@@ -550,7 +624,6 @@ nextBtn.addEventListener('click', () => {
 
 // Keyboard navigation: use the left and right arrow keys to change slides.
 document.addEventListener('keydown', (event) => {
-    // Do not intercept keys while the user is typing in a form field.
     if (event.target.matches('input, textarea, select, [contenteditable="true"]')) {
         return;
     }
